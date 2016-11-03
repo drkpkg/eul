@@ -1,0 +1,38 @@
+<div class="ui small modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Información <%= @user.user_type.title %>
+  </div>
+  <div class="ui form">
+    <div class="field">
+      <label>
+        <strong>Name:</strong>
+        <%= @user.name %>
+      </label>
+    </div>
+    <div class="field">
+      <label>
+        <strong>Lastname:</strong>
+        <%= @user.lastname %>
+      </label>
+    </div>
+    <div class="field">
+      <label>
+        <strong>Document:</strong>
+        <%= @user.document %>
+      </label>
+    </div>
+    <div class="field">
+      <label>
+        <strong>Phone:</strong>
+        <%= @user.phone %>
+      </label>
+    </div>
+    <div class="field">
+      <label>
+        <strong>Email:</strong>
+        <%= @user.email %>
+      </label>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,50 @@
 <h1>Editing User</h1>
 
-<%= render 'form', user: @user %>
+<div class="ui two column centered grid">
+  <div class="column">
+    <%= form_for(@user, html:{class: 'ui form'}) do |f| %>
+      <% if @user.errors.any? %>
+
+        <div class="ui negative message">
+          <i class="close icon"></i>
+          <div class="header">
+            Se produjo un error al guardar, por favor lee las advertencias
+          </div>
+          <ul>
+            <% @user.errors.messages.each do |index, message| %>
+              <% message.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+
+      <% end %>
+
+      <div class="field">
+        <%= f.label :phone, 'Teléfono' %>
+        <%= f.text_field :phone %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email, 'Email' %>
+        <%= f.text_field :email %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, 'Contraseña' %>
+        <%= f.text_field :password %>
+      </div>
+
+      <div class="ui buttons">
+        <%= f.submit 'Guardar', class: 'ui green button' %>
+        <%= link_to 'Cancelar', users_path, class: "ui red button" %>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>

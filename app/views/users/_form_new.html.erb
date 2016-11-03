@@ -1,0 +1,71 @@
+<div class="ui two column centered grid">
+  <div class="column">
+    <%= form_for(user, html:{class: 'ui form'}) do |f| %>
+      <% if user.errors.any? %>
+
+        <div class="ui negative message">
+          <i class="close icon"></i>
+          <div class="header">
+            Se produjo un error al guardar, por favor lee las advertencias
+          </div>
+          <ul>
+            <% user.errors.messages.each do |index, message| %>
+              <% message.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+
+      <% end %>
+
+      <div class="field">
+        <%= f.label :name, 'Nombre' %>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :lastname, 'Apellido' %>
+        <%= f.text_field :lastname %>
+      </div>
+
+      <div class="field">
+        <%= f.label :document, 'Cédula de identidad' %>
+        <%= f.text_field :document %>
+      </div>
+
+      <div class="field">
+        <%= f.label :user_type_id, 'Tipo de usuario' %>
+        <div id="tdropdown" class="">
+          <%= f.select :user_type_id, UserType.all.collect { |t| [t.title, t.id] },
+          {},
+          {include_blank: true, class: 'ui fluid search selection dropdown'} %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone, 'Teléfono' %>
+        <%= f.text_field :phone %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email, 'Email' %>
+        <%= f.text_field :email %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, 'Contraseña' %>
+        <div class="ui action input">
+          <%= f.text_field :password %>
+          <a id="pwdgen" class="ui icon orange button" data-content="Generar nueva contraseña"><i class="ui refresh icon"></i></a>
+        </div>
+      </div>
+
+      <div class="ui buttons">
+        <%= f.submit 'Guardar', class: 'ui green button' %>
+        <%= link_to 'Cancelar', users_path, class: "ui red button" %>
+      </div>
+    <% end %>
+
+  </div>
+</div>
