@@ -1,5 +1,4 @@
-<div class="ui two column centered grid">
-  <div class="column">
+
     <%= form_for(user_type, html:{class:'ui form'}) do |f| %>
       <% if user_type.errors.any? %>
         <div id="error_explanation">
@@ -23,5 +22,3 @@
         <%= link_to 'Cancelar', user_types_path, class: 'ui red button' %>
       </div>
     <% end %>
-  </div>
-</div>
