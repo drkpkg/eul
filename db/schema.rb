@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 20161102193237) do
     t.string   "document"
     t.string   "phone"
     t.string   "email"
-    t.string   "password"
+    t.string   "password_digest"
     t.integer  "user_type_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["user_type_id"], name: "index_users_on_user_type_id", using: :btree
   end
 

@@ -1,22 +1,27 @@
-<%= form_for(user_type) do |f| %>
-  <% if user_type.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user_type.errors.count, "error") %> prohibited this user_type from being saved:</h2>
+<div class="ui two column centered grid">
+  <div class="column">
+    <%= form_for(user_type, html:{class:'ui form'}) do |f| %>
+      <% if user_type.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(user_type.errors.count, "error") %> prohibited this user_type from being saved:</h2>
 
-      <ul>
-      <% user_type.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% user_type.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
+      <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit %>
+      <div class="ui buttons">
+        <%= f.submit 'Guardar', class: 'ui green button' %>
+        <%= link_to 'Cancelar', user_types_path, class: 'ui red button' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
