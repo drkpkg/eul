@@ -15,7 +15,7 @@ function initThings(){
     $('#user_password').val(pwd);
   });
 
-  $('#pwdgen').popup();
+  $('.pop').popup();
 }
 
 function generatePassword() {

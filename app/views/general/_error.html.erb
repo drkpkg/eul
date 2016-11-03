@@ -1,0 +1,13 @@
+<div class="ui negative message">
+  <i class="close icon"></i>
+  <div class="header">
+    Se produjo un error al guardar, por favor lee las advertencias
+  </div>
+  <ul>
+    <% model_object.errors.messages.each do |index, message| %>
+      <% message.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

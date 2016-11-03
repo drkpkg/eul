@@ -61,6 +61,15 @@ class UserTypesController < ApplicationController
     end
   end
 
+  #API section
+
+  def new_remote
+  end
+
+  def create_remote
+    @user_type = UserType.new(user_type_params)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_type
