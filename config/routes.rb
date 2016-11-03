@@ -1,10 +1,20 @@
 Rails.application.routes.draw do
+
   root 'page#index'
+  get 'login' => 'page#login'
 
-  resources :users
-  resources :user_types
+  scope :session do
+    post 'create' => 'session#create'
+    post 'delete' => 'session#delete'
+  end
 
-  scope :remote do
+  scope :admin do
+    get '/' => 'page#dashboard', as: :dashboard
+    resources :users
+    resources :user_types
+  end
+
+  scope :api do
     scope :user_types do
       get 'new' => 'user_types#new_remote', as: :user_types_new_remote
       post 'create' => 'user_types#create_remote', as: :user_types_create_remote
