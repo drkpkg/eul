@@ -13,36 +13,87 @@
       <br>
       <div class="ui secondary menu">
         <div class="header item">EUL</div>
-        <%= link_to users_url, class: 'item' do %>
-          Usuarios
-        <% end %>
-        <%= link_to user_types_url, class: 'item' do %>
-          Tipo de usuarios
-        <% end %>
-        <a class="item">
-          Paquetes
-        </a>
-        <a class="item">
-          Rutas
-        </a>
+
         <div class="right menu">
-          <%= button_to 'Salir', delete_url, method: :post, class: "ui item" %>
+          <%= button_to delete_url, method: :post, class: "ui item icon button pop", data:{content:"Cerrar sesión"} do %>
+            <i class="ui remove icon"></i>
+          <% end %>
         </div>
       </div>
       <div class="ui divider"></div>
-      <br>
       <div class="ui grid">
         <div class="four wide column">
           <div class="ui secondary vertical pointing fluid menu">
-            <%= link_to users_url, class: 'item' do %>
-              Usuarios
-            <% end %>
-            <%= link_to user_types_url, class: 'item' do %>
-              Tipo de usuarios
-            <% end %>
-            <a class="item">
-              Paquetes
-            </a>
+            <div class="ui accordion">
+              <div class="active title">
+                <i class="dropdown icon"></i>
+                Usuarios
+              </div>
+              <div class="content">
+                <%= link_to users_url, class: 'item' do %>
+                  Listado
+                <% end %>
+                <%= link_to new_user_url, class: 'item' do %>
+                  Nuevo usuario
+                <% end %>
+              </div>
+            </div>
+            <div class="ui accordion">
+              <div class="active title">
+                <i class="dropdown icon"></i>
+                Roles
+              </div>
+              <div class="content">
+                <%= link_to user_types_url, class: 'item' do %>
+                  Listado
+                <% end %>
+                <%= link_to new_user_type_url, class: 'item' do %>
+                  Nuevo rol
+                <% end %>
+              </div>
+            </div>
+            <div class="ui accordion">
+              <div class="active title">
+                <i class="dropdown icon"></i>
+                Paquetes
+              </div>
+              <div class="content">
+                <%= link_to packages_url, class: 'item' do %>
+                  Listado
+                <% end %>
+                <%= link_to new_package_url, class: 'item' do %>
+                  Nuevo paquete
+                <% end %>
+              </div>
+            </div>
+            <div class="ui accordion">
+              <div class="active title">
+                <i class="dropdown icon"></i>
+                Contenedores
+              </div>
+              <div class="content">
+                <%= link_to containers_url, class: 'item' do %>
+                  Listado
+                <% end %>
+                <%= link_to new_container_url, class: 'item' do %>
+                  Nuevo contenedor
+                <% end %>
+              </div>
+            </div>
+            <div class="ui accordion">
+              <div class="active title">
+                <i class="dropdown icon"></i>
+                Remitentes
+              </div>
+              <div class="content">
+                <%= link_to receivers_url, class: 'item' do %>
+                  Listado
+                <% end %>
+                <%= link_to new_receiver_url, class: 'item' do %>
+                  Nuevo remitente
+                <% end %>
+              </div>
+            </div>
           </div>
         </div>
         <div class="twelve wide column">

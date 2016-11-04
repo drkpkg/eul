@@ -10,10 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102193237) do
+ActiveRecord::Schema.define(version: 20161104161050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "containers", force: :cascade do |t|
+    t.string   "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "packages", force: :cascade do |t|
+    t.string   "code"
+    t.integer  "state"
+    t.integer  "fragility"
+    t.integer  "size"
+    t.float    "weight"
+    t.float    "value"
+    t.integer  "conveyance"
+    t.date     "shipping_date"
+    t.date     "delivery_date"
+    t.text     "observations"
+    t.integer  "user_id"
+    t.integer  "receiver_id"
+    t.integer  "container_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["container_id"], name: "index_packages_on_container_id", using: :btree
+    t.index ["receiver_id"], name: "index_packages_on_receiver_id", using: :btree
+    t.index ["user_id"], name: "index_packages_on_user_id", using: :btree
+  end
+
+  create_table "receivers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "user_types", force: :cascade do |t|
     t.string   "title"
@@ -34,5 +69,8 @@ ActiveRecord::Schema.define(version: 20161102193237) do
     t.index ["user_type_id"], name: "index_users_on_user_type_id", using: :btree
   end
 
+  add_foreign_key "packages", "containers"
+  add_foreign_key "packages", "receivers"
+  add_foreign_key "packages", "users"
   add_foreign_key "users", "user_types"
 end

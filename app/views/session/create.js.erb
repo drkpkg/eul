@@ -1,4 +1,4 @@
-<% if @user.nil? %>
+<% if @status == false %>
   $('#message').append("<%= j render 'general/error_no_data' %>");
   $('.message .close')
     .on('click', function() {
@@ -6,20 +6,7 @@
         .closest('.message')
         .transition('fade')
       ;
-    })
-  ;
+    });
 <% else %>
-  <% if @user.blank? %>
-    $('#message').append("<%= j render 'general/error', model_object: @user %>")
-    $('.message .close')
-      .on('click', function() {
-        $(this)
-          .closest('.message')
-          .transition('fade')
-        ;
-      })
-    ;
-  <% else %>
     $(location).attr('href', "<%= dashboard_url %>")
-  <% end %>
 <% end %>

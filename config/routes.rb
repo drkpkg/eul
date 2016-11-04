@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     get '/' => 'page#dashboard', as: :dashboard
     resources :users
     resources :user_types
+    resources :packages
+    resources :receivers
+    resources :containers
   end
 
   scope :api do

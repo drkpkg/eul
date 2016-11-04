@@ -5,6 +5,11 @@ $(document).ready(function(){
   initThings();
 });
 
+$(document).on('turbolinks:load', function(){
+  initThings();
+});
+
+
 function initThings(){
   $('.message .close').on('click', function() {
     $(this).closest('.message').transition('fade');
