@@ -44,6 +44,4 @@ test:
   database: eul_test
 
 production:
-  database: eul_production
-  username: eul
-  password: <%= ENV['EUL_DATABASE_PASSWORD'] %>
+  url: <%= ENV["DATABASE_URL"] %>
