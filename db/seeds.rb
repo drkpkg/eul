@@ -26,10 +26,9 @@ receiver = Receiver.new(name: 'Warrio colitas',
                         phone: '12345678',
                         address: 'Reino muy muy lejano')
 receiver.save
-puts receiver.errors.full_messages
 
 packages = [
-            [code: 'HmrNHzNdMl',
+            {code: 'HmrNHzNdMl',
             fragility: 0,
             size: '10x30x12',
             weight: 3.5,
@@ -38,9 +37,11 @@ packages = [
             shipping_date: '06/11/2016',
             delivery_date: '07/11/2016',
             user_id: user.id,
-            receiver_id: receiver.id]
+            receiver_id: receiver.id}
            ]
 
 packages.each do |package|
-  Package.create(package)
+  pkg = Package.new(package)
+  pkg.save
+  puts pkg.errors.full_messages
 end

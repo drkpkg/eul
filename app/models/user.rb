@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
 
   belongs_to :user_type
+  has_many :packages
 
   validates_presence_of :name, message: "campo nombre en blanco"
   validates_presence_of :lastname, message: "campo apellido en blanco"

@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20161104161050) do
     t.text     "observations"
     t.integer  "user_id"
     t.integer  "receiver_id"
-    t.integer  "container_id"
+    t.integer  "container_id",  default: 0
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.index ["container_id"], name: "index_packages_on_container_id", using: :btree
@@ -69,8 +69,4 @@ ActiveRecord::Schema.define(version: 20161104161050) do
     t.index ["user_type_id"], name: "index_users_on_user_type_id", using: :btree
   end
 
-  add_foreign_key "packages", "containers"
-  add_foreign_key "packages", "receivers"
-  add_foreign_key "packages", "users"
-  add_foreign_key "users", "user_types"
 end

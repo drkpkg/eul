@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :phone
       t.string :email
       t.string :password_digest
-      t.references :user_type, foreign_key: true
+      t.references :user_type, on_delete: :cascade
       t.timestamps
     end
   end
