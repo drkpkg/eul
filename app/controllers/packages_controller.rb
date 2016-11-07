@@ -26,6 +26,8 @@ class PackagesController < ApplicationController
   # POST /packages.json
   def create
     @package = Package.new(package_params)
+    @package.code = generate_code(@package)
+    @package.container_id = calculate_container(@package.size, @package.weight, @package.fragility)
 
     respond_to do |format|
       if @package.save
@@ -70,6 +72,21 @@ class PackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params.require(:package).permit(:code, :state, :fragility, :size, :weight, :value, :conveyance, :shipping_date, :delivery_date, :observations, :user_id, :receiver_id, :container_id)
+      params.require(:package).permit(:fragility, :size, :weight, :value, :conveyance, :shipping_date, :delivery_date, :observations, :user_id, :receiver_id)
+    end
+
+    def calculate_container(size, weight, fragile)
+      long, width, height = size.split('x')
+      vol_weight = (long * width * height)/500
+      if weight < 1 and fragile == 0
+        #Create container and add it if not exist
+      else
+        return 0
+      end
+    end
+
+    def generate_code(package)
+      hash = Hashids.new("eul_salt")
+      hash = hashids.encode(@package.id, @package.client_id, @package.receiver_id, @package.container_id)
     end
 end

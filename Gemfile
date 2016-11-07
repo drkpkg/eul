@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'dotenv-rails'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+gem 'hashids'
 
 group :development, :test do
   gem 'byebug', platform: :mri

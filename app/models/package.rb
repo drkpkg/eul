@@ -1,5 +1,5 @@
 class Package < ApplicationRecord
   belongs_to :user
   belongs_to :receiver
-  belongs_to :container
+  belongs_to :container, optional: true
 end

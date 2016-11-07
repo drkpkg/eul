@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 20161104161050) do
 
   create_table "packages", force: :cascade do |t|
     t.string   "code"
-    t.integer  "state"
+    t.integer  "state",         default: 0
     t.integer  "fragility"
-    t.integer  "size"
+    t.string   "size"
     t.float    "weight"
     t.float    "value"
     t.integer  "conveyance"
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20161104161050) do
     t.integer  "user_id"
     t.integer  "receiver_id"
     t.integer  "container_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["container_id"], name: "index_packages_on_container_id", using: :btree
     t.index ["receiver_id"], name: "index_packages_on_receiver_id", using: :btree
     t.index ["user_id"], name: "index_packages_on_user_id", using: :btree

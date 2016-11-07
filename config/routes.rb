@@ -22,6 +22,9 @@ Rails.application.routes.draw do
       get 'new' => 'user_types#new_remote', as: :user_types_new_remote
       post 'create' => 'user_types#create_remote', as: :user_types_create_remote
     end
+    scope :receivers do
+      get 'new' => 'receivers#new_remote', as: :receivers_new_remote
+    end
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

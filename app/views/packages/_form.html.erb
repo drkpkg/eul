@@ -1,82 +1,60 @@
-<%= form_for(package) do |f| %>
+<%= form_for(package, html:{class: "ui form"}) do |f| %>
   <% if package.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(package.errors.count, "error") %> prohibited this package from being saved:</h2>
-
-      <ul>
-      <% package.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+    <%= render 'general/error', model_object: package %>
   <% end %>
 
-  <div class="field">
-    <%= f.label :code %>
-    <%= f.text_field :code %>
+  <div class="four fields">
+    <div class="field">
+      <%= f.label :size, 'Tamaño' %>
+      <%= f.text_field :size %>
+    </div>
+    <div class="field">
+      <%= f.label :weight, 'Peso' %>
+      <%= f.text_field :weight %>
+    </div>
+
+    <div class="field">
+      <%= f.label :value, 'Valor' %>
+      <%= f.text_field :value %>
+    </div>
+
+    <div class="field">
+      <%= f.label :fragility, 'Frágil' %>
+      <div class="ui toggle checkbox">
+        <%= f.check_box :fragility %>
+        <label></label>
+      </div>
+    </div>
+  </div>
+
+  <div class="two fields">
+    <div class="field">
+      <%= f.label :user_id, 'Cliente' %>
+      <div class="ui action">
+        <%= f.select :user_id, User.all.collect { |t| [t.name, t.id] },{},{include_blank: true, class: 'ui fluid search selection dropdown'}%>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.label :receiver_id, 'Remitente' %>
+      <div class="ui action">
+        <%= f.select :receiver_id, Receiver.all.collect { |t| [t.name, t.id] },{},{include_blank: true, class: 'ui fluid search selection dropdown'} do %>
+        <% end %>
+
+        <%= link_to receivers_new_remote_url, remote: true, class: 'ui icon button pop', data:{content: 'Nuevo remitente'} do %>
+          <i class="ui green add circle icon"></i>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :state %>
-    <%= f.text_field :state %>
+    <%= f.label :observations, 'Observaciones' %>
+    <%= f.text_area :observations %>
   </div>
 
-  <div class="field">
-    <%= f.label :fragility %>
-    <%= f.text_field :fragility %>
-  </div>
-
-  <div class="field">
-    <%= f.label :size %>
-    <%= f.text_field :size %>
-  </div>
-
-  <div class="field">
-    <%= f.label :weight %>
-    <%= f.text_field :weight %>
-  </div>
-
-  <div class="field">
-    <%= f.label :value %>
-    <%= f.text_field :value %>
-  </div>
-
-  <div class="field">
-    <%= f.label :conveyance %>
-    <%= f.text_field :conveyance %>
-  </div>
-
-  <div class="field">
-    <%= f.label :shipping_date %>
-    <%= f.date_select :shipping_date %>
-  </div>
-
-  <div class="field">
-    <%= f.label :delivery_date %>
-    <%= f.date_select :delivery_date %>
-  </div>
-
-  <div class="field">
-    <%= f.label :observations %>
-    <%= f.text_field :observations %>
-  </div>
-
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :receiver_id %>
-    <%= f.text_field :receiver_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :container_id %>
-    <%= f.text_field :container_id %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="ui buttons">
+    <%= f.submit 'Guardar', class: "ui green button" %>
+    <%= link_to 'Cancelar', packages_path, class: "ui red button" %>
   </div>
 <% end %>

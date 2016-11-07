@@ -62,6 +62,16 @@ class ReceiversController < ApplicationController
     end
   end
 
+  #API section
+
+  def new_remote
+    render json: {data: 'hallo'}
+  end
+
+  def create_remote
+    @receiver = Receiver.new(receiver_params)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_receiver
