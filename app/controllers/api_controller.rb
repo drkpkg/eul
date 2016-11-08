@@ -7,7 +7,7 @@ class ApiController < ApplicationController
   #
   def package_info
     begin
-      @package = Package.find_by(id: params[:id])
+      @package = Package.find_by(code: params[:code])
       render json: @package, status: :ok
     rescue
       render json: {status: :bad_request}, status: :bad_request
