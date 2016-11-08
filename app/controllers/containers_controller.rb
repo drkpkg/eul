@@ -1,5 +1,6 @@
 class ContainersController < ApplicationController
   layout 'dashboard'
+  before_action :validate_user
   before_action :set_container, only: [:show, :edit, :update, :destroy]
 
   # GET /containers

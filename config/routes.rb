@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'page#index'
   get 'login' => 'page#login'
 
@@ -25,6 +24,10 @@ Rails.application.routes.draw do
     scope :receivers do
       get 'new' => 'receivers#new_remote', as: :receivers_new_remote
     end
+
+    get 'packages/:id' => 'api#package_info'
+    get 'offices' => 'api#offices'
+
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

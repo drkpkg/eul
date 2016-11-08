@@ -1,12 +1,12 @@
-<div class="ui middle six column center aligned grid">
-  <div class="column">
+<div class="ui two column centered grid">
+  <div class="center aligned column">
     <h2 class="ui image header">
       <div class="content">
         Ingreso
       </div>
     </h2>
-    <%= form_for :session, url: create_url, remote: true, class:'ui large form' do |f| %>
-      <div class="ui stacked secondary  segment">
+    <%= form_for :session, url: create_url, remote: true, class:'ui form' do |f| %>
+      <div class="ui segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
@@ -19,7 +19,7 @@
             <%= f.password_field :password, placeholder: 'Contraseña' %>
           </div>
         </div>
-        <%= f.submit 'Entrar', class: 'ui fluid teal submit button' %>
+        <%= f.submit 'Entrar', class: 'ui teal submit button' %>
       </div>
       <div id="message">
       </div>

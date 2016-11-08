@@ -10,8 +10,18 @@
 # t.string :phone
 # t.string :address
 
-user_type = UserType.create(title: 'Administrador')
-user_type = UserType.create(title: 'Cliente')
+admin = UserType.create(title: 'Administrador', access: true)
+user_type = UserType.create(title: 'Cliente', access: false)
+
+adm = User.new(name: 'Admin',
+            lastname: 'Fulanito',
+            document: '4232883',
+            phone: '12340987',
+            email: 'admin@fulanito.com',
+            password: '123456',
+            user_type_id: admin.id)
+adm.save
+
 
 user = User.new(name: 'Cosme',
             lastname: 'Fulanito',

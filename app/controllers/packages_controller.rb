@@ -1,5 +1,6 @@
 class PackagesController < ApplicationController
   layout 'dashboard'
+  before_action :validate_user
   before_action :set_package, only: [:show, :edit, :update, :destroy]
 
   # GET /packages

@@ -1,5 +1,6 @@
 class UserTypesController < ApplicationController
   layout 'dashboard'
+  before_action :validate_user
   before_action :set_user_type, only: [:show, :edit, :update, :destroy]
 
   # GET /user_types

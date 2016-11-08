@@ -1,5 +1,6 @@
 class ReceiversController < ApplicationController
   layout 'dashboard'
+  before_action :validate_user
   before_action :set_receiver, only: [:show, :edit, :update, :destroy]
 
   # GET /receivers
