@@ -16,4 +16,5 @@ function initPackage(){
     minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
     maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5)
   });
+  $('.pop').popup();
 }
