@@ -40,7 +40,6 @@ function call_calculator(){
     async: false,
     data: {size: size, weight: weight, checked: checked}
   }).done(function(data){
-    console.log(data);
     $('#package_value').val(data.total)
   }).fail(function(){
     console.log('error');

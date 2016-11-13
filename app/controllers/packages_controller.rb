@@ -72,7 +72,8 @@ class PackagesController < ApplicationController
     long, width, height = params[:size].split('x')
     weight = params[:weight]
     fragile = params[:checked]
-    render json: {total: calculate_price(long.to_f, width.to_f, height.to_f, weight.to_f, fragile)}, status: 200
+    @price = calculate_price(long.to_f, width.to_f, height.to_f, weight.to_f, fragile)
+    # render json: {total: }, status: 200
   end
 
   private
