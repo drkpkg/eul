@@ -25,8 +25,14 @@ Rails.application.routes.draw do
       get 'new' => 'receivers#new_remote', as: :receivers_new_remote
     end
 
-    get 'packages/:code' => 'api#package_info'
-    get 'offices' => 'api#offices'
+    scope :packages do
+      get ':code' => 'api#package_info'
+      post 'calculate' => 'packages#calculate'
+    end
+
+    scope :offices do
+      get '/' => 'api#offices'
+    end
 
   end
 
