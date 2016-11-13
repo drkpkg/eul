@@ -1,0 +1,30 @@
+<div id="receiver-modal" class="ui tiny modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Nuevo destinatario
+  </div>
+  <div class="content">
+    <div class="ui two column centered grid">
+      <div class="column">
+        <div id="message"></div>
+        <%= form_for :receiver, url: receivers_create_remote_url, remote: true, html:{class:'ui form'} do |f| %>
+          <div class="field">
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+          </div>
+
+          <div class="field">
+            <%= f.label :phone %>
+            <%= f.text_field :phone %>
+          </div>
+
+          <div class="field">
+            <%= f.label :address %>
+            <%= f.text_field :address %>
+          </div>
+          <%= f.submit 'Guardar' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

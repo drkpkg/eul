@@ -66,7 +66,7 @@ class ReceiversController < ApplicationController
   #API section
 
   def new_remote
-    render json: {data: 'hallo'}
+    # render json: {data: 'hallo'}
   end
 
   def create_remote

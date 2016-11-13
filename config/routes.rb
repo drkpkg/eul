@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
     scope :receivers do
       get 'new' => 'receivers#new_remote', as: :receivers_new_remote
+      post 'create' => 'receivers#create_remote', as: :receivers_create_remote
     end
 
     scope :packages do

@@ -17,11 +17,23 @@ function initPackage(){
     maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5)
   });
   $('.pop').popup();
-  $('#package_size').keyup(function(){
-    call_calculator();
+  $('#package_size').keyup(function(event){
+    var reg = new RegExp("^[0-9]+x[0-9]+x[0-9]+$");
+    var value = $(this).val();
+    if (reg.test(value)) {
+      call_calculator();
+    }else{
+      return false;
+    }
   });
-  $('#package_weight').keyup(function(){
-    call_calculator();
+  $('#package_weight').keyup(function(event){
+    var reg = new RegExp("^[0-9]+.[0-9]+$");
+    var value = $(this).val();
+    if (reg.test(value)) {
+      call_calculator();
+    }else{
+      return false;
+    }
   });
 
   $('#package_fragility').change(function(){
