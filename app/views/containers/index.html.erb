@@ -2,7 +2,7 @@
 
 <h1>Containers</h1>
 
-<table>
+<table class="ui celled table">
   <thead>
     <tr>
       <th>Code</th>
@@ -14,9 +14,19 @@
     <% @containers.each do |container| %>
       <tr>
         <td><%= container.code %></td>
-        <td><%= link_to 'Show', container %></td>
-        <td><%= link_to 'Edit', edit_container_path(container) %></td>
-        <td><%= link_to 'Destroy', container, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <div class="ui buttons">
+            <%= link_to container, class: "ui icon blue button" do %>
+              <i class="info icon"></i>
+            <% end %>
+            <%= link_to edit_container_path(container), class: "ui icon teal button" do %>
+              <i class="edit icon"></i>
+            <% end %>
+            <%= link_to container, method: :delete, data: { confirm: 'Are you sure?' }, class: "ui icon red button" do %>
+              <i class="remove icon"></i>
+            <% end %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

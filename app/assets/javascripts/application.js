@@ -24,7 +24,6 @@ $(document).on('turbolinks:load', function(){
   ready();
 });
 
-
 function ready(){
   $('.selection.dropdown').dropdown();
   $('.ui.accordion').accordion();

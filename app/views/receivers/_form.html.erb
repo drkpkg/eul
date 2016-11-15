@@ -1,4 +1,4 @@
-<%= form_for(receiver) do |f| %>
+<%= form_for(receiver, html:{class: "ui form"}) do |f| %>
   <% if receiver.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(receiver.errors.count, "error") %> prohibited this receiver from being saved:</h2>

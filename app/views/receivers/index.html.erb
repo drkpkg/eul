@@ -2,7 +2,7 @@
 
 <h1>Receivers</h1>
 
-<table>
+<table class="ui celled table">
   <thead>
     <tr>
       <th>Name</th>
@@ -18,9 +18,19 @@
         <td><%= receiver.name %></td>
         <td><%= receiver.phone %></td>
         <td><%= receiver.address %></td>
-        <td><%= link_to 'Show', receiver %></td>
-        <td><%= link_to 'Edit', edit_receiver_path(receiver) %></td>
-        <td><%= link_to 'Destroy', receiver, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <div class="ui buttons">
+            <%= link_to receiver, class: "ui icon blue button" do %>
+              <i class="info icon"></i>
+            <% end %>
+            <%= link_to edit_receiver_path(receiver), class: "ui icon teal button" do %>
+              <i class="edit icon"></i>
+            <% end %>
+            <%= link_to receiver, method: :delete, data: { confirm: 'Are you sure?' }, class: "ui icon red button" do %>
+              <i class="remove icon"></i>
+            <% end %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
