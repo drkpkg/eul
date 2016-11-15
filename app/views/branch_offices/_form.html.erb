@@ -1,0 +1,109 @@
+<%= form_for(branch_office) do |f| %>
+  <% if branch_office.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(branch_office.errors.count, "error") %> prohibited this branch_office from being saved:</h2>
+
+      <ul>
+      <% branch_office.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+  <div class="field">
+    <%= f.label :latitude,:Latitud %>
+    <%= f.text_field :latitude %>
+  </div>
+
+  <div class="field">
+    <%= f.label :longitude,:Longitud %>
+    <%= f.text_field :longitude %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address,:Direccion %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title,:Titulo %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :description,:Descripcion %>
+    <%= f.text_area :description %>
+  </div>
+
+  
+
+  <div class="actions">
+    <%= f.submit :"Crear pues che"%>
+  </div>
+<script>
+var infoWindow = null;
+
+function geocodeLatLng(geocoder, map, infowindow,marker) {
+  var latlng = marker.getPosition();
+    
+  geocoder.geocode({'location': latlng}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      if (results[1]) {
+        var marker = new google.maps.Marker({
+          position: latlng,
+          map: map
+        });
+        document.getElementById('branch_office_address').value=results[1].formatted_address;
+        infowindow.open(map, marker);
+      } else {
+        window.alert('No results found');
+      }
+    } else {
+      window.alert('Geocoder failed due to: ' + status);
+    }
+  });
+}
+function openInfoWindow1(map,marker) {
+    infoWindow.open(map, marker);
+}
+function openInfoWindow(map,marker) {
+    var markerLatLng = marker.getPosition();
+    infoWindow.setContent([
+        '&lt;b&gt;La posicion del marcador es:&lt;/b&gt;&lt;br/&gt;',
+        markerLatLng.lat(),
+        ', ',
+        markerLatLng.lng(),
+        '&lt;br/&gt;&lt;br/&gt;Arr&amp;aacute;strame y haz click para actualizar la posici&amp;oacute;n.'
+    ].join(''));
+     document.getElementById('branch_office_latitude').value=markerLatLng.lat();
+     document.getElementById('branch_office_longitude').value=markerLatLng.lng();
+    var geocoder = new google.maps.Geocoder;
+     geocodeLatLng(geocoder, map, infoWindow,marker);
+}
+  function initMap() {
+  var myLatLng = {lat:-17.792384379711333, lng:-63.18690381079108};
+  infoWindow = new google.maps.InfoWindow();
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: myLatLng
+  });
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    draggable: true,
+    title: 'Hello World!'
+  });
+  google.maps.event.addListener(marker, 'click', function(){
+        openInfoWindow1(map,marker);
+    });
+  google.maps.event.addListener(marker, 'dragend', function(){ 
+    openInfoWindow(map,marker); 
+    });
+}
+</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0EUBWot6f52UNm0K8XJ1orbQr1wvHYk&language=es&libraries=drawing&callback=initMap"
+         async defer></script>
+<% end %>
