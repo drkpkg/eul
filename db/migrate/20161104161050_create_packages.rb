@@ -3,7 +3,8 @@ class CreatePackages < ActiveRecord::Migration[5.0]
     create_table :packages do |t|
       t.string :code
       t.integer :state, default: 0
-      t.integer :fragility
+      t.boolean :fragility, default: false
+      t.boolean :express, default: false
       t.string :size
       t.float :weight
       t.float :value

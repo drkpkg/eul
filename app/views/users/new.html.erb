@@ -36,8 +36,9 @@
     <%= f.label :user_type_id, 'Tipo de usuario' %>
     <div class="ui action input">
       <%= f.select :user_type_id, UserType.all.collect { |t| [t.title, t.id] },{},{include_blank: true, class: 'ui fluid search selection dropdown'}%>
-      <%= link_to user_types_new_remote_url, remote: true, class: 'ui icon button pop', data:{content: 'Agregar nuevo rol'} do %>
-        <i class="ui green add circle icon"></i>
+        <option value="0">Administrador</option>
+        <option value="1">Empleado</option>
+        <option value="2">Cliente</option>
       <% end %>
     </div>
   </div>

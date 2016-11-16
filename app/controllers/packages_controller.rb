@@ -29,7 +29,7 @@ class PackagesController < ApplicationController
   def create
     long, width, height = params[:package][:size].split('x')
     @package = Package.new(package_params)
-    @package.value = calculate_price(long.to_f, width.to_f, height.to_f, params[:package][:weight].to_f, params[:package][:fragile])
+    @package.value = calculate_price(long.to_f, width.to_f, height.to_f, params[:package][:weight].to_f, params[:package][:fragile], params[:package][:express])
     @package.code = generate_code(@package)
     # @package.container_id = calculate_container(@package.size, @package.weight, @package.fragility)
 
@@ -72,7 +72,8 @@ class PackagesController < ApplicationController
     long, width, height = params[:size].split('x')
     weight = params[:weight]
     fragile = params[:checked]
-    @price = calculate_price(long.to_f, width.to_f, height.to_f, weight.to_f, fragile)
+    express = params[:express]
+    @price = calculate_price(long.to_f, width.to_f, height.to_f, weight.to_f, fragile, express)
     # render json: {total: }, status: 200
   end
 
@@ -84,12 +85,13 @@ class PackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params.require(:package).permit(:fragility, :size, :weight, :value, :conveyance, :shipping_date, :delivery_date, :observations, :user_id, :receiver_id)
+      params.require(:package).permit(:fragility, :size, :weight, :conveyance, :shipping_date, :delivery_date, :observations, :user_id, :receiver_id)
     end
 
-    def calculate_price(long, width, height, weight, fragile)
+    def calculate_price(long, width, height, weight, fragile, express)
       price = weight/(((long * width * height)/5000) * 1000)
       price = price + (price/2) if fragile == 'true'
+      price = price + 5 if express == 'true'
       total = (price * 6.96).round(2)
     end
 
@@ -110,7 +112,8 @@ class PackagesController < ApplicationController
                          package.container_id,
                          package.weight,
                          package.conveyance,
-                         package.fragility,
+                         (package.fragility ? 1 : 0),
+                         (package.express ? 1 : 0),
                          package.value)
     end
 end

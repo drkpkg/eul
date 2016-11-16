@@ -39,6 +39,10 @@ function initPackage(){
   $('#package_fragility').change(function(){
     call_calculator();
   });
+
+  $('#package_express').change(function(){
+    call_calculator();
+  });
 }
 
 
@@ -46,11 +50,12 @@ function call_calculator(){
   var size = $('#package_size').val();
   var weight = $('#package_weight').val();
   var checked = $('#package_fragility').is(':checked');
+  var express = $('#package_express').is(':checked');
   $.ajax({
     url: '/api/packages/calculate/',
     type: 'POST',
     async: false,
-    data: {size: size, weight: weight, checked: checked}
+    data: {size: size, weight: weight, checked: checked, express: express}
   }).done(function(data){
     $('#package_value').val(data.total)
   }).fail(function(){

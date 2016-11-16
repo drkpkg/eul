@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
 
-  belongs_to :user_type
   has_many :packages
 
   validates_presence_of :name, message: "campo nombre en blanco"
@@ -10,7 +9,6 @@ class User < ApplicationRecord
   validates_presence_of :phone, message: "campo teléfono en blanco"
   validates_presence_of :email, message: "campo email en blanco"
   validates_presence_of :password, message: "campo password en blanco"
-  validates_presence_of :user_type, message: "campo tipo en blanco"
 
   validates_uniqueness_of :email, message: "email ya existe"
   validates_uniqueness_of :phone, message: "teléfono ya existe"

@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :phone
       t.string :email
       t.string :password_digest
-      t.references :user_type, on_delete: :cascade
+      t.integer :user_type
       t.timestamps
     end
   end

@@ -20,7 +20,7 @@
 
   <tbody>
     <% @packages.each do |package| %>
-      <% if package.fragility == 1 %>
+      <% if package.fragility %>
         <tr class="fragil">
       <% else %>
         <tr>

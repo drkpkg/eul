@@ -24,7 +24,8 @@ ActiveRecord::Schema.define(version: 20161104161050) do
   create_table "packages", force: :cascade do |t|
     t.string   "code"
     t.integer  "state",         default: 0
-    t.integer  "fragility"
+    t.boolean  "fragility",     default: false
+    t.boolean  "express",       default: false
     t.string   "size"
     t.float    "weight"
     t.float    "value"
@@ -35,8 +36,8 @@ ActiveRecord::Schema.define(version: 20161104161050) do
     t.integer  "user_id"
     t.integer  "receiver_id"
     t.integer  "container_id",  default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.index ["container_id"], name: "index_packages_on_container_id", using: :btree
     t.index ["receiver_id"], name: "index_packages_on_receiver_id", using: :btree
     t.index ["user_id"], name: "index_packages_on_user_id", using: :btree
@@ -50,13 +51,6 @@ ActiveRecord::Schema.define(version: 20161104161050) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_types", force: :cascade do |t|
-    t.string   "title"
-    t.boolean  "access"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "lastname"
@@ -64,10 +58,9 @@ ActiveRecord::Schema.define(version: 20161104161050) do
     t.string   "phone"
     t.string   "email"
     t.string   "password_digest"
-    t.integer  "user_type_id"
+    t.integer  "user_type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["user_type_id"], name: "index_users_on_user_type_id", using: :btree
   end
 
 end
