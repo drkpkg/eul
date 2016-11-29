@@ -17,25 +17,25 @@
 
   <% end %>
 
-  <div class="field">
-    <%= f.label :name, 'Nombre' %>
-    <%= f.text_field :name %>
-  </div>
+  <div class="four fields">
+    <div class="field">
+      <%= f.label :name, 'Nombre' %>
+      <%= f.text_field :name %>
+    </div>
 
-  <div class="field">
-    <%= f.label :lastname, 'Apellido' %>
-    <%= f.text_field :lastname %>
-  </div>
+    <div class="field">
+      <%= f.label :lastname, 'Apellido' %>
+      <%= f.text_field :lastname %>
+    </div>
 
-  <div class="field">
-    <%= f.label :document, 'Cédula de identidad' %>
-    <%= f.text_field :document %>
-  </div>
+    <div class="field">
+      <%= f.label :document, 'Cédula de identidad' %>
+      <%= f.text_field :document %>
+    </div>
 
-  <div class="field">
-    <%= f.label :user_type_id, 'Tipo de usuario' %>
-    <div class="ui action input">
-      <%= f.select :user_type_id, UserType.all.collect { |t| [t.title, t.id] },{},{include_blank: true, class: 'ui fluid search selection dropdown'}%>
+    <div class="field">
+      <%= f.label :user_type_id, 'Tipo de usuario' %>
+      <%= f.select :user_type, {},{prompt: 'Tipo de usuario'},{include_blank: true, class: 'ui fluid search selection dropdown'} do %>
         <option value="0">Administrador</option>
         <option value="1">Empleado</option>
         <option value="2">Cliente</option>
@@ -43,21 +43,23 @@
     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :phone, 'Teléfono' %>
-    <%= f.text_field :phone %>
-  </div>
+  <div class="three fields">
+    <div class="field">
+      <%= f.label :phone, 'Teléfono' %>
+      <%= f.text_field :phone %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email, 'Email' %>
-    <%= f.text_field :email %>
-  </div>
+    <div class="field">
+      <%= f.label :email, 'Email' %>
+      <%= f.text_field :email %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password, 'Contraseña' %>
-    <div class="ui action input">
-      <%= f.text_field :password %>
-      <a id="pwdgen" class="ui icon orange button pop" data-content="Generar contraseña"><i class="ui refresh icon"></i></a>
+    <div class="field">
+      <%= f.label :password, 'Contraseña' %>
+      <div class="ui action input">
+        <%= f.text_field :password %>
+        <a id="pwdgen" class="ui icon orange button pop" data-content="Generar contraseña"><i class="ui refresh icon"></i></a>
+      </div>
     </div>
   </div>
 
@@ -66,5 +68,3 @@
     <%= link_to 'Cancelar', users_path, class: "ui red button" %>
   </div>
 <% end %>
-
-<%= render 'user_types/new_remote' %>

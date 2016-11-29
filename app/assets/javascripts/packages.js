@@ -11,12 +11,46 @@ $(document).on('turbolinks:load', function(){
 
 function initPackage(){
   var today = new Date();
-  $('.ui.calendar').calendar({
+
+  $('#package_delivery_date').attr('disabled', true);
+  $('#shipping_date').calendar({
     type: 'date',
+    monthFirst: false,
+    formatter: {
+      date: function (date, settings) {
+        if (!date) return '';
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        return day + '/' + month + '/' + year;
+      }
+    },
     minDate: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-    maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5)
+    maxDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
+
+    onChange: function (date, text) {
+      day = date.getDate();
+      $('#package_delivery_date').attr('disabled', false).val('');
+      $('#delivery_date').calendar({
+        type: 'date',
+        monthFirst: false,
+        formatter: {
+          date: function (date, settings) {
+            if (!date) return '';
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            return day + '/' + month + '/' + year;
+          }
+        },
+        minDate: new Date(today.getFullYear(), today.getMonth(), day),
+        maxDate: new Date(today.getFullYear(), today.getMonth(), day + 5)
+      });
+    }
   });
+
   $('.pop').popup();
+
   $('#package_size').keyup(function(event){
     var reg = new RegExp("^[0-9]+x[0-9]+x[0-9]+$");
     var value = $(this).val();
@@ -26,6 +60,7 @@ function initPackage(){
       return false;
     }
   });
+
   $('#package_weight').keyup(function(event){
     var reg = new RegExp("^[0-9]+.[0-9]+$");
     var value = $(this).val();

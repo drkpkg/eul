@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.includes(:user_type).all
+    @users = User.all
   end
 
   # GET /users/1
@@ -66,12 +66,12 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.includes(:user_type).find(params[:id])
+      @user = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params_for_create
-      params.require(:user).permit(:name, :lastname, :document, :phone, :email, :password, :user_type_id)
+      params.require(:user).permit(:name, :lastname, :document, :phone, :email, :password, :user_type)
     end
 
     def user_params_for_update

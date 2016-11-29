@@ -2,42 +2,42 @@
 
 <% conveyance = ['Terrestre', 'Aéreo', 'Marino'] %>
 <% state = ['No enviado', 'Enviado', 'Parado', 'Entregado'] %>
+<% color = ['teal', 'blue', 'red', 'green'] %>
 
 <table class="ui sortable celled table">
   <thead>
     <tr>
-      <th>Código</th>
-      <th>Estado</th>
-      <th>Size</th>
-      <th>Weight</th>
-      <th>Value</th>
-      <th>Conveyance</th>
-      <th>Shipping date</th>
-      <th>Delivery date</th>
-      <th colspan="3"></th>
+      <th>Paquete</th>
+      <th>Tamaño</th>
+      <th>Peso</th>
+      <th>Precio</th>
+      <th>Transporte</th>
+      <th>Fecha de envío</th>
+      <th>Fecha de entrega</th>
+      <!-- <th colspan="3"></th> -->
     </tr>
   </thead>
 
   <tbody>
     <% @packages.each do |package| %>
       <% if package.fragility %>
-        <tr class="fragil">
+        <tr class="fragil pop" data-html='<label class="ui <%= color[package.state] %> label"><%= state[package.state] %></label>' data-position="right center">
       <% else %>
-        <tr>
+        <tr class="pop" data-html='<label class="ui <%= color[package.state] %> label"><%= state[package.state] %></label>' data-position="right center">
       <% end %>
-        <td><%= package.code %></td>
-        <td><%= state[package.state] %></td>
+        <td>
+          <%= link_to package do %>
+            <%= package.code %>
+          <% end %>
+        </td>
         <td><%= package.size %></td>
         <td><%= package.weight %></td>
         <td><%= package.value %></td>
         <td><%= conveyance[package.conveyance - 1] %></td>
         <td><%= package.shipping_date %></td>
         <td><%= package.delivery_date %></td>
-        <td>
+        <!-- <td>
           <div class="ui buttons">
-            <%= link_to package, class:'ui icon button' do %>
-              <i class="ui info icon"></i>
-            <% end %>
             <%= link_to edit_package_path(package), class:'ui icon button' do %>
               <i class="ui edit icon"></i>
             <% end %>
@@ -45,7 +45,7 @@
               <i class="ui remove icon"></i>
             <% end %>
           </div>
-        </td>
+        </td> -->
       </tr>
     <% end %>
   </tbody>

@@ -17,7 +17,7 @@ class PackagesController < ApplicationController
   # GET /packages/new
   def new
     @package = Package.new
-    @users = User.where(user_type_id: UserType.find_by(title: 'Cliente').id)
+    @users = User.where(user_type: 2)
   end
 
   # GET /packages/1/edit

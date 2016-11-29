@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private 
+  private
 
   def current_user
     @_current_user ||= session[:current_user_id] &&

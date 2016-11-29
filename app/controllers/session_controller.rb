@@ -1,16 +1,13 @@
 class SessionController < ApplicationController
   def create
-    @user = User.includes(:user_type).find_by(email: params[:session][:email])
+    @user = User.find_by(email: params[:session][:email])
     begin
-      if @user.user_type.access == false
-        @status = false
-      else
-        if @user.authenticate(params[:session][:password])
-          @status = true
-          session[:current_user_id] = @user.id
-          cookies.signed[:user_id] = @user.id
-          redirect_to dashboard_url
-        end
+      if @user.authenticate(params[:session][:password])
+        @status = true
+        session[:current_user_id] = @user.id
+        session[:current_user_type] = @user.user_type
+        cookies.signed[:user_id] = @user.id
+        redirect_to dashboard_url
       end
     rescue
       @status = false
