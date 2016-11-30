@@ -2,7 +2,7 @@
   $('#package_receiver_id').append("<option value='<%= @receiver.id %>'><%= @receiver.name %></option>");
   $('#receiver-modal').modal('hide');
 <% else %>
-  $('#message').append("<%= j render 'general/error', model_object: @receiver %>");
+  $('#message').empty().append("<%= j render 'general/error', model_object: @receiver %>");
 <% end %>
 
 $('.message .close').on('click', function() {
