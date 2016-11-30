@@ -1,7 +1,7 @@
 $('#message').empty();
 $('#receiver-modal').modal('show');
 $('#receiver_address').keyup(function(){
-  var query = 'http://nominatim.openstreetmap.org/search/'+ encodeURIComponent($(this).val()) +'?format=json&addressdetails=1&limit=1&polygon_svg=1'
+  var query = 'https://nominatim.openstreetmap.org/search/'+ encodeURIComponent($(this).val()) +'?format=json&addressdetails=1&limit=1&polygon_svg=1'
   var map = null;
   var layer = null;
   var marker = null;
