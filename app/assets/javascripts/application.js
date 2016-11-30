@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require semantic-ui
+//= require leaflet
 //= require_tree .
 
 $(document).ready(function(){
