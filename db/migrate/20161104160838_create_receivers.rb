@@ -4,7 +4,9 @@ class CreateReceivers < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :phone
       t.string :address
-
+      t.string :complement
+      t.string :lat
+      t.string :lon
       t.timestamps
     end
   end

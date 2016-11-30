@@ -2,21 +2,38 @@ $('#message').empty();
 $('#receiver-modal').modal('show');
 $('#receiver_address').keyup(function(){
   var query = 'http://nominatim.openstreetmap.org/search/'+ encodeURIComponent($(this).val()) +'?format=json&addressdetails=1&limit=1&polygon_svg=1'
-  $.ajax({
-    url: query,
-    dataType: 'JSON',
-    type: 'GET',
-    success: function(data){
-      $.each(data, function(index, element) {
-        //<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox=-63.20353031158448%2C-17.773050227247097%2C-63.19773674011231%2C-17.769770610234573&amp;layer=mapnik&amp;marker=-17.771410426261923%2C-63.20063352584839;map=18" style="border: 1px solid black"></iframe><br/><small><a href="http://www.openstreetmap.org/?mlat=-17.77141&amp;mlon=-63.20063#map=18/-17.77141/-63.20063">View Larger Map</a></small>
-        var mapbb = element.boundingbox[0] + '%2C' + element.boundingbox[1] + '%2C' + element.boundingbox[2]+ '%2C' + element.boundingbox[3];
-        var latlon = element.lat+'%2C'+element.lon
-        // $('#map').empty().html('<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox=' +  + '&amp;layer=mapnik&amp;map=18&amp" style="border: 1px solid black"></iframe><br/><small><a href="http://www.openstreetmap.org/?mlat=-17.77141&amp;mlon=-63.20063#map=18/-17.77141/-63.20063">View Larger Map</a></small>');
-        // $('#map').empty().html('<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/export/embed.html?bbox='+mapbb+'&amp;layer=mapnik&amp;marker='+latlon+'#map=18" style="border: 1px solid black"></iframe><br/><small><a href="http://www.openstreetmap.org/?mlat='+element.lat+'&amp;mlon='+element.lon+'#map=18/'+element.lat+'/'+element.lon+'">View Larger Map</a></small>');
-        // $('#map').empty().html('<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://www.openstreetmap.org/search?#map=19/'+element.lat+'/'+element.lon+'&layers=N" style="border: 1px solid black"></iframe>');
-
-        // console.log(element.address, element.lat, element.lon, element.boundingbox[0]);
-      });
-    }
-  });
+  var map = null;
+  var layer = null;
+  var marker = null;
+  clearTimeout($.data(this, 'timer'));
+  var wait = setTimeout(function(){
+    $.ajax({
+      url: query,
+      dataType: 'JSON',
+      type: 'GET',
+      success: function(data){
+        $.each(data, function(index, element) {
+          $('#map-container').empty().html('<div id="map"></div>');
+          changeLocation(element.lat, element.lon);
+          map = L.map('map').setView([element.lat, element.lon], 18);
+          layer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
+          marker = L.marker([element.lat, element.lon],{draggable: true});
+          layer.addTo(map)
+          marker.addTo(map);
+          marker.on("drag", function(e) {
+            var marker = e.target;
+            var position = marker.getLatLng();
+            map.panTo(new L.LatLng(position.lat, position.lng));
+            changeLocation(position.lat, position.lng);
+          });
+        });
+      }
+    });
+  }, 2000);
+  $(this).data('timer', wait);
 });
+
+function changeLocation(lat, lon){
+  $('#receiver_lat').val(lat);
+  $('#receiver_lon').val(lon);
+}

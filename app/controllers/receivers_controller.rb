@@ -73,14 +73,20 @@ class ReceiversController < ApplicationController
     @receiver = Receiver.new(receiver_params)
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_receiver
-      @receiver = Receiver.find(params[:id])
-    end
+  def render_map
+    map_r = 'map(:center => {:latlng => [#{params[:lat]},#{params[:lon]}],:zoom => 18}, :markers => [{:latlng => [51.52238797921441, -0.08366235665359283],:popup => "Hello!"}])'
+    render text: map_r
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def receiver_params
-      params.require(:receiver).permit(:name, :phone, :address)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_receiver
+    @receiver = Receiver.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def receiver_params
+    params.require(:receiver).permit(:name, :phone, :address, :lat, :lon, :complement)
+  end
 end

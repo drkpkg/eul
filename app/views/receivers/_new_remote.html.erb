@@ -11,26 +11,35 @@
           <div class="ui grid">
             <div class="ten wide column">
               <div class="field">
-                <%= f.label :name %>
+                <%= f.label :name, "Nombre" %>
                 <%= f.text_field :name %>
               </div>
               <div class="field">
-                <%= f.label :phone %>
+                <%= f.label :phone, "Teléfono" %>
                 <%= f.text_field :phone %>
               </div>
-
               <div class="field">
-                <%= f.label :address, class: "search" %>
+                <%= f.label :address, "Dirección", class: "search" %>
                 <%= f.text_field :address %>
               </div>
-            </div>
-            <div class="six wide column">
-              <div id="map" class="field"></div>
+              <div class="field">
+                <%= f.label :complement, "Idicaciones adicionales" %>
+                <%= f.text_area :complement %>
+              </div>
+              <div class="hide">
+                <%= f.text_field :lat %>
+                <%= f.text_field :lon %>
+              </div>
             </div>
           </div>
           <div class="ui hidden divider"></div>
           <%= f.submit 'Guardar', class: "ui green button" %>
         <% end %>
+      </div>
+      <div class="column">
+        <div id="map-container">
+          <%= image_tag 'map' %>
+        </div>
       </div>
     </div>
   </div>

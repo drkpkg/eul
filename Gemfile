@@ -13,6 +13,7 @@ gem 'dotenv-rails'
 gem 'semantic-ui-sass'
 gem 'hashids'
 gem 'leaflet-rails'
+gem 'httparty'
 
 group :development, :test do
   gem 'byebug', platform: :mri
