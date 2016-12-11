@@ -20,6 +20,7 @@ class ApiController < ApplicationController
   # return format: Json
   #
   def offices
-    render json: {status: :bad_request}, status: :bad_request
+    offices = Office.select("id, lat, lon, description").all
+    render json: offices, status: :success
   end
 end
