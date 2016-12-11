@@ -43,3 +43,15 @@ packages.each do |package|
   pkg.save
   puts pkg.errors.full_messages
 end
+
+courses = [
+  {lat: -17.786566518254055, lon: -63.18745851516724, description: "Por aqui"},
+  {lat: -17.371610024104744, lon: -63.28674316406249, description: "Oficina Montero"},
+  {lat: 60.93991814536288, lon: 76.55695080757141,	description: "Oficina Tomsk"},
+  {lat: -18.145851771694467, lon: -65.9619140625,	description: "Oficina Santa Cruz de la sierra"},
+  {lat: 38.634639869944, lon: -90.31676888465881,	description: "Oficina Clayton"}
+]
+
+courses.each do |course|
+  Office.create(course)
+end
