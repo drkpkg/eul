@@ -74,7 +74,6 @@ class PackagesController < ApplicationController
     fragile = params[:checked]
     express = params[:express]
     @price = calculate_price(long.to_f, width.to_f, height.to_f, weight.to_f, fragile, express)
-    # render json: {total: }, status: 200
   end
 
   private
@@ -95,15 +94,16 @@ class PackagesController < ApplicationController
       total = (price * 6.96).round(2)
     end
 
-    def calculate_container(size, weight, fragile)
-      long, width, height = size.split('x')
-      vol_weight = (long * width * height)/5000
-      if weight < 1 and fragile == 0
-        #Create container and add it if not exist
-      else
-        return 0
-      end
-    end
+    # def calculate_container(size, weight, fragile)
+    #   long, width, height = size.split('x')
+    #   vol_weight = (long * width * height)/5000
+    #   if weight < 1 and fragile == 0
+    #     @container = Container.new
+    #     #Create container and add it if not exist
+    #   else
+    #     return 0
+    #   end
+    # end
 
     def generate_code(package)
       hash = Hashids.new("eul_salt")

@@ -100,6 +100,48 @@
             <% end %>
           </div>
         </div>
+        <div class="ui accordion">
+          <div class="active title">
+            <i class="dropdown icon"></i>
+            Oficinas
+          </div>
+          <div class="content">
+            <%= link_to offices_url, class: 'item' do %>
+              Listado
+              <i class="map pin icon"></i>
+            <% end %>
+            <%= link_to new_office_url, class: 'item' do %>
+              Nueva sucursal
+              <i class="ui icon">
+                <i class="ui icons">
+                  <i class="map pin icon"></i>
+                  <i class="plus corner icon"></i>
+                </i>
+              </i>
+            <% end %>
+          </div>
+        </div>
+        <div class="ui accordion">
+          <div class="active title">
+            <i class="dropdown icon"></i>
+            Rutas
+          </div>
+          <div class="content">
+            <%= link_to courses_url, class: 'item' do %>
+              Listado
+              <i class="map icon"></i>
+            <% end %>
+            <%= link_to new_course_url, class: 'item' do %>
+              Nueva Ruta
+              <i class="ui icon">
+                <i class="ui icons">
+                  <i class="map icon"></i>
+                  <i class="plus corner icon"></i>
+                </i>
+              </i>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
     <div class="twelve wide column">

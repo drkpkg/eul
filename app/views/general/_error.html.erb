@@ -6,7 +6,7 @@
   <ul>
     <% model_object.errors.messages.each do |index, message| %>
       <% message.each do |msg| %>
-        <li><%= msg %></li>
+        <li><%= index %> - <%= msg %></li>
       <% end %>
     <% end %>
   </ul>

@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<%= map(:center => {
+    :latlng => [@office.lat, @office.lon],
+    :zoom => 18
+  },
+  :markers => [
+    {
+       :latlng => [@office.lat, @office.lon],
+    }
+  ]
+) %>
+
+<div class="field">
+  <strong>Lugar:</strong>
+  <%= @office.description %>
+</div>
+
+<div class="ui buttons">
+  <%= link_to 'Editar', edit_office_path(@office), class: "ui teal button" %>
+  <%= link_to 'Volver a sucursales', offices_path, class: "ui blue button" %>
+  <%= link_to 'Eliminar', @office, method: :delete, data: { confirm: '¿Está seguro de borrar esta sucursal?' }, class: "ui red button" %>
+</div>

@@ -1,0 +1,36 @@
+
+<%= form_for(office, html:{class:'ui form'}) do |f| %>
+  <% if office.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(office.errors.count, "error") %> prohibited this office from being saved:</h2>
+      <ul>
+      <% office.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div id="map-container" class="map-office"></div>
+
+  <div class="field">
+    <%= f.label :description, 'Descripción' %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <div class="ui buttons">
+      <%= f.submit 'Guardar', class:'ui green button' %>
+      <%= link_to 'Cancelar', offices_url, class: "ui red button" %>
+    </div>
+  </div>
+
+  <div class="field hide">
+    <%= f.label :lat %>
+    <%= f.text_field :lat %>
+  </div>
+
+  <div class="field hide">
+    <%= f.label :lon %>
+    <%= f.text_field :lon %>
+  </div>
+<% end %>

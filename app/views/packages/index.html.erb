@@ -1,3 +1,5 @@
+<h1>Paquetes</h1>
+
 <p id="notice"><%= notice %></p>
 
 <% conveyance = ['Terrestre', 'Aéreo', 'Marino'] %>
@@ -36,6 +38,13 @@
         <td><%= conveyance[package.conveyance - 1] %></td>
         <td><%= package.shipping_date %></td>
         <td><%= package.delivery_date %></td>
+        <% if package.state == 0 %>
+          <td>
+            <%= link_to package, method: :delete, data: { confirm: 'Are you sure?' }, class:'ui icon button pop', data:{tooltip: 'Cancelar envío'} do %>
+              <i class="ui remove icon"></i>
+            <% end %>
+          </td>
+        <% end %>
         <!-- <td>
           <div class="ui buttons">
             <%= link_to edit_package_path(package), class:'ui icon button' do %>

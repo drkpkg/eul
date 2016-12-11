@@ -78,6 +78,15 @@ function initPackage(){
   $('#package_express').change(function(){
     call_calculator();
   });
+
+  $('#package_receiver_id').change(function(){
+    $('#dimmer-loader').addClass('active')
+    // $.ajax({
+    //   url: '/api/courses/calculate_route'
+    // });
+
+    $('#dimmer-loader').removeClass('active')
+  });
 }
 
 

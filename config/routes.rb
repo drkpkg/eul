@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :packages
     resources :receivers
     resources :containers
+    resources :courses
+    resources :offices
   end
 
   scope :api do
@@ -30,9 +32,9 @@ Rails.application.routes.draw do
       get '/' => 'api#offices'
     end
 
-    scope :map do
-      get 'render_map' => 'receivers#render_map', as: :render_map
-    end
+    # scope :map do
+    #   get 'render_map' => 'receivers#render_map', as: :render_map
+    # end
 
   end
 

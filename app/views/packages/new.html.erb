@@ -1,80 +1,89 @@
 <h1>Registro de paquete</h1>
-
-<%= form_for(@package, html:{class: "ui form"}) do |f| %>
-  <% if @package.errors.any? %>
-    <%= render 'general/error', model_object: @package %>
-  <% end %>
-  <div class="four fields">
-    <div class="field">
-      <%= f.label :size, 'Tamaño' %>
-      <%= f.text_field :size, placeholder:'{largo}x{ancho}x{alto}' %>
-    </div>
-    <div class="field">
-      <%= f.label :weight, 'Peso (Gramos)' %>
-      <%= f.text_field :weight, placeholder:'00.00' %>
-    </div>
-    <div class="two fields">
-      <div class="field">
-        <%= f.label :fragility, 'Frágil' %>
-        <%= f.check_box :fragility %>
-      </div>
-      <div class="field">
-        <%= f.label :express, 'Express' %>
-        <%= f.check_box :express %>
-      </div>
-    </div>
-    <div class="field">
-      <%= f.label :value, 'Precio de envío' %>
-      <%= f.text_field :value, disabled: true %>
-    </div>
+<div class="ui segment">
+  <div id="dimmer-loader" class="ui dimmer">
+    <div class="ui indeterminate text loader">Calculando ruta</div>
   </div>
 
-  <div class="three fields">
-    <div class="field">
-      <%= f.label :user_id, 'Cliente' %>
-      <div class="ui action">
-        <%= f.select :user_id, @users.collect { |t| [t.name, t.id] },{prompt: 'Cliente'},{class: 'ui fluid search selection dropdown'}%>
+  <%= form_for(@package, html:{class: "ui form"}) do |f| %>
+    <% if @package.errors.any? %>
+      <%= render 'general/error', model_object: @package %>
+    <% end %>
+    <div class="four fields">
+      <div class="field">
+        <%= f.label :size, 'Tamaño' %>
+        <%= f.text_field :size, placeholder:'{largo}x{ancho}x{alto}' %>
+      </div>
+      <div class="field">
+        <%= f.label :weight, 'Peso (Gramos)' %>
+        <%= f.text_field :weight, placeholder:'00.00' %>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <%= f.label :fragility, 'Frágil' %>
+          <%= f.check_box :fragility %>
+        </div>
+        <div class="field">
+          <%= f.label :express, 'Express' %>
+          <%= f.check_box :express %>
+        </div>
+      </div>
+      <div class="field">
+        <%= f.label :value, 'Precio de envío' %>
+        <%= f.text_field :value, disabled: true %>
       </div>
     </div>
-    <div class="field">
-      <%= f.label :receiver_id, 'Remitente' %>
-      <div class="ui action input">
-        <%= f.select :receiver_id, Receiver.all.collect { |t| [t.name, t.id] },{prompt: 'Remitente'},{include_blank: true, class: 'ui fluid search selection dropdown'}%>
-        <%= link_to receivers_new_remote_url, remote: true, class: 'ui icon button pop', data:{content: 'Nuevo remitente'} do %>
-          <i class="ui green add circle icon"></i>
+
+    <div class="three fields">
+      <div class="field">
+        <%= f.label :user_id, 'Cliente' %>
+        <div class="ui action">
+          <%= f.select :user_id, @users.collect { |t| [t.name, t.id] },{prompt: 'Cliente'},{class: 'ui fluid search selection dropdown'}%>
+        </div>
+      </div>
+      <div class="field">
+        <%= f.label :receiver_id, 'Remitente' %>
+        <div class="ui action input">
+          <%= f.select :receiver_id, Receiver.all.collect { |t| [t.name, t.id] },{prompt: 'Remitente'},{include_blank: true, class: 'ui fluid search selection dropdown'}%>
+          <%= link_to receivers_new_remote_url, remote: true, class: 'ui icon button pop', data:{content: 'Nuevo remitente'} do %>
+            <i class="ui green add circle icon"></i>
+          <% end %>
+        </div>
+      </div>
+      <div class="field">
+        <%= f.label :conveyance, 'Tipo de envío' %>
+        <%= f.select :conveyance, {},{prompt: 'Tipo de Transporte'},{include_blank: true, class: 'ui fluid search selection dropdown'} do %>
+          <option value="1">Terrestre</option>
+          <option value="2">Aéreo</option>
+          <option value="3">Marino</option>
         <% end %>
       </div>
     </div>
+
+    <div class="two fields">
+      <div id="shipping_date" class="field ui calendar">
+        <%= f.label :shipping_date, 'Fecha de envío' %>
+        <%= f.text_field :shipping_date, placeholder:'DD/MM/AA' %>
+      </div>
+      <div id="delivery_date" class="field ui calendar">
+        <%= f.label :delivery_date, 'Fecha límite de entrega' %>
+        <%= f.text_field :delivery_date, placeholder:'DD/MM/AA' %>
+      </div>
+    </div>
+
+    <div id="route-calc" class="field">
+
+    </div>
+
     <div class="field">
-      <%= f.label :conveyance, 'Tipo de envío' %>
-      <%= f.select :conveyance, {},{prompt: 'Tipo de Transporte'},{include_blank: true, class: 'ui fluid search selection dropdown'} do %>
-        <option value="1">Terrestre</option>
-        <option value="2">Aéreo</option>
-        <option value="3">Marino</option>
-      <% end %>
+      <%= f.label :observations, 'Observaciones' %>
+      <%= f.text_area :observations %>
     </div>
-  </div>
 
-  <div class="two fields">
-    <div id="shipping_date" class="field ui calendar">
-      <%= f.label :shipping_date, 'Fecha de envío' %>
-      <%= f.text_field :shipping_date, placeholder:'DD/MM/AA' %>
+    <div class="ui buttons">
+      <%= f.submit 'Guardar', class: "ui green button" %>
+      <%= link_to 'Cancelar', packages_path, class: "ui red button" %>
     </div>
-    <div id="delivery_date" class="field ui calendar">
-      <%= f.label :delivery_date, 'Fecha límite de entrega' %>
-      <%= f.text_field :delivery_date, placeholder:'DD/MM/AA' %>
-    </div>
-  </div>
-  
-  <div class="field">
-    <%= f.label :observations, 'Observaciones' %>
-    <%= f.text_area :observations %>
-  </div>
-
-  <div class="ui buttons">
-    <%= f.submit 'Guardar', class: "ui green button" %>
-    <%= link_to 'Cancelar', packages_path, class: "ui red button" %>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
 <%= render 'receivers/new_remote' %>
