@@ -45,11 +45,11 @@ client.save
 #             receiver_id: .id}
 #            ]
 
-packages.each do |package|
-  pkg = Package.new(package)
-  pkg.save
-  puts pkg.errors.full_messages
-end
+# packages.each do |package|
+#   pkg = Package.new(package)
+#   pkg.save
+#   puts pkg.errors.full_messages
+# end
 
 courses = [
   {lat: -17.786566518254055, lon: -63.18745851516724, description: "Oficina principal"},
