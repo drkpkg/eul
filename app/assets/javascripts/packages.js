@@ -117,6 +117,7 @@ function call_calculator(){
   }).done(function(data){
     $('#package_value').val(data.total)
     $.get('/admin/courses.json?e=' + express, function(data){
+      $('#package_course_id').empty();
       $.each(data, function(index, item){
         $('#package_course_id').append("<option value='"+ item.id +"'>" + item.title + "</option>");
       });
