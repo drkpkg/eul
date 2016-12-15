@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     scope :packages do
       get ':code' => 'api#package_info'
       post 'calculate' => 'packages#calculate'
+      post 'checking' => 'packages#checking', as: :checking_package
     end
 
     scope :geo do
@@ -35,11 +36,6 @@ Rails.application.routes.draw do
     scope :offices do
       get '/' => 'api#offices'
     end
-
-    # scope :map do
-    #   get 'render_map' => 'receivers#render_map', as: :render_map
-    # end
-
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

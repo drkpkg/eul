@@ -20,8 +20,8 @@ function initCourse(){
   $('#map-container').empty().html('<div id="map-standar" class="map-standar"></div>');
   var map = L.map('map-standar').setView([0, 0], 2);
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
-  var routes = {};
-  var lines = []
+  var routes = [];
+  var positions = []
   var total = 0;
 
   $(".ui.dropdown").dropdown();
@@ -30,13 +30,18 @@ function initCourse(){
     var v = $(this).attr('data-value');
     $.get('/admin/offices/'+ v +'.json', function(data){
       clearMap(map, routes);
-      routes[v] = L.marker([data.lat, data.lon]).bindPopup(data.description);
+      routes.push(L.marker([data.lat, data.lon]).bindPopup(data.description));
+      positions.push(v);
       drawInMap(map, routes);
 
       $(".ui.label .delete.icon").click(function(){
         clearMap(map, routes);
-        var v = $(this).parent().attr('data-value');
-        delete routes[v];
+        var l = $(this).parent().attr('data-value');
+        var actual = positions.indexOf(l);
+        if (actual > -1) {
+            routes.splice(actual, 1);
+            positions.splice(actual, 1);
+        }
         drawInMap(map, routes);
       });
     });

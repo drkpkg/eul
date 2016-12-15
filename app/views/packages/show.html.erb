@@ -66,20 +66,29 @@
   </p>
 </div>
 
-<div class="ui segment">
+<!-- <div class="ui segment"> -->
   <div class="ui steps">
-    <div class="step">
-      <div class="content">
-        1
-      </div>
-    </div>
-    <div class="step">
-      <div class="content">
-        2
-      </div>
-    </div>
+    <% course = Course.find_by(id: @package.course_id) %>
+    <% course.route['r'].each do |index| %>
+      <% if index != '' %>
+        <% if @package.checked_in.include?(index) %>
+          <%= link_to checking_package_url(pid: @package.id, cid: index), method: :post, remote: true, class:"completed step" do %>
+            <i class="pin map icon"></i>
+            <div class="content">
+              <%= Office.find_by(id: index).description %>
+            </div>
+          <% end %>
+        <% else %>
+          <%= link_to checking_package_url(pid: @package.id, cid: index), method: :post, remote: true, class:"step" do %>
+            <div class="content">
+              <%= Office.find_by(id: index).description %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
-</div>
+<!-- </div> -->
 
 <div class="ui buttons">
   <!-- <%= link_to 'Checking', edit_package_path(@package), class: "ui teal button" %> -->

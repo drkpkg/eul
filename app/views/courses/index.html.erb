@@ -4,17 +4,22 @@
 
 <% @courses.each do |course| %>
   <div class="column route">
-    <label class="ui teal label attach">Ruta: <%= course.title %></label>
+    <% if course.express %>
+      <label class="ui orange label attach">Ruta: <%= course.title %></label>
+    <% else %>
+      <label class="ui teal label attach">Ruta: <%= course.title %></label>
+    <% end %>
     <div class="ui tiny steps">
-      <% r = course.route['r'].reject { |c| c.empty? } %>
-      <% r.each do |route| %>
-        <% office = Office.find_by(id: route) %>
-        <div class="step">
-          <i class="map pin icon"></i>
-          <div class="content">
-            <div class="title"><%= office.description %></div>
+      <% course.route['r'].each do |route| %>
+        <% if route != '' %>
+          <% office = Office.find_by(id: route) %>
+          <div class="step">
+            <i class="map pin icon"></i>
+            <div class="content">
+              <div class="title"><%= office.description %></div>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

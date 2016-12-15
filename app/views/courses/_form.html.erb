@@ -13,17 +13,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title, 'Descripción' %>
-    <%= f.text_field :title, placeholder: 'Descripción' %>
+  <div class="two fields">
+    <div class="field">
+      <%= f.label :title, 'Descripción' %>
+      <%= f.text_field :title, placeholder: 'Descripción' %>
+    </div>
+    <div class="field">
+      <%= f.label :express, 'Ruta express' %>
+      <%= f.check_box :express %>
+    </div>
   </div>
+
   <div class="field">
     <%= f.label :route, 'Ruta asignada' %>
     <%= f.select :route, Office.all.collect {|office| [office.description, office.id]},{prompt: "Seleccione orden de rutas"},{multiple: true, class:'ui fluid dropdown'} %>
   </div>
 
   <div class="ui buttons">
-
     <%= f.submit 'Guardar', class: 'ui green button' %>
     <%= link_to 'Back', courses_path, class: 'ui red button' %>
   </div>

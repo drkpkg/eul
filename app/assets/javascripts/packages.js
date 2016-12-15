@@ -79,24 +79,28 @@ function initPackage(){
     call_calculator();
   });
 
-  $('#package_receiver_id').change(function(){
-    $.get('/admin/receivers/'+ $(this).val() + '.json', function(data){
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var lat = position.coords.latitude;
-        var lon = position.coords.longitude;
-        $.ajax({
-          url: '/api/geo/calculate',
-          type: 'GET',
-          data: {location:{lat: lat,lon: lon}, destiny:{lat: data.lat, lon: data.lon}},
-          success: function(data){
-            call_calculator();
-            t = parseFloat($('#package_value').val()) + parseFloat(data.total);
-            $('#package_value').val(t);
-          }
-        });
-      });
-    });
-  });
+  // $('#package_express').change(function(){
+  //   $('')
+  // });
+
+  // $('#package_receiver_id').change(function(){
+  //   $.get('/admin/receivers/'+ $(this).val() + '.json', function(data){
+  //     navigator.geolocation.getCurrentPosition(function(position) {
+  //       var lat = position.coords.latitude;
+  //       var lon = position.coords.longitude;
+  //       $.ajax({
+  //         url: '/api/geo/calculate',
+  //         type: 'GET',
+  //         data: {location:{lat: lat,lon: lon}, destiny:{lat: data.lat, lon: data.lon}},
+  //         success: function(data){
+  //           call_calculator();
+  //           t = parseFloat($('#package_value').val()) + parseFloat(data.total);
+  //           $('#package_value').val(t);
+  //         }
+  //       });
+  //     });
+  //   });
+  // });
 }
 
 
@@ -112,6 +116,15 @@ function call_calculator(){
     data: {size: size, weight: weight, checked: checked, express: express}
   }).done(function(data){
     $('#package_value').val(data.total)
+    $.get('/admin/courses.json?e=' + express, function(data){
+      $.each(data, function(index, item){
+        $('#package_course_id').append("<option value='"+ item.id +"'>" + item.title + "</option>");
+      });
+
+      console.log(data);
+    });
+
+
   }).fail(function(){
     console.log('error');
   });

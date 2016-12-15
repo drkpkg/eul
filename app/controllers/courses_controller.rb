@@ -6,7 +6,12 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    begin
+      @courses = Course.where(express: params[:e])
+    rescue
+      @courses = Course.all
+    end
+
   end
 
   # GET /courses/1
@@ -26,12 +31,12 @@ class CoursesController < ApplicationController
   # POST /courses
   # POST /courses.json
   def create
-    @course = Course.new
-    @course.title = params[:course][:title]
+    @course = Course.new(course_params)
+    # @course.title = params[:course][:title]
     @course.route = {r: params[:course][:route]}
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
+        format.html { redirect_to courses_path, notice: 'Course was successfully created.' }
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new }
@@ -72,6 +77,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:route)
+      params.require(:course).permit(:route, :title, :express)
     end
 end

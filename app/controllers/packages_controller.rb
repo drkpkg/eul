@@ -31,13 +31,13 @@ class PackagesController < ApplicationController
     @package = Package.new(package_params)
     @package.value = calculate_price(long.to_f, width.to_f, height.to_f, params[:package][:weight].to_f, params[:package][:fragile], params[:package][:express])
     @package.code = generate_code(@package)
-    # @package.container_id = calculate_container(@package.size, @package.weight, @package.fragility)
 
     respond_to do |format|
       if @package.save
         format.html { redirect_to @package, notice: 'Package was successfully created.' }
         format.json { render :show, status: :created, location: @package }
       else
+        @users = User.where(user_type: 2)
         format.html { render :new }
         format.json { render json: @package.errors, status: :unprocessable_entity }
       end
@@ -68,6 +68,19 @@ class PackagesController < ApplicationController
     end
   end
 
+  def checking
+    @package = Package.find_by(id: params[:pid])
+    if @package.state == 0
+      @package.state = 1 #enviado
+    end
+    @package.checked_in.push(params[:cid])
+    if @package.save
+      render json: {status: :ok}
+    else
+      render json: {status: :bad_request}
+    end
+  end
+
   def calculate
     long, width, height = params[:size].split('x')
     weight = params[:weight]
@@ -84,7 +97,7 @@ class PackagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def package_params
-      params.require(:package).permit(:fragility, :size, :weight, :conveyance, :shipping_date, :delivery_date, :observations, :user_id, :receiver_id)
+      params.require(:package).permit(:fragility, :size, :weight, :conveyance, :shipping_date, :delivery_date, :observations, :user_id, :receiver_id, :course_id)
     end
 
     def calculate_price(long, width, height, weight, fragile, express)

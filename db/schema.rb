@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(version: 20161211143945) do
   create_table "courses", force: :cascade do |t|
     t.string   "title"
     t.jsonb    "route"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "express",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "offices", force: :cascade do |t|
@@ -49,12 +50,15 @@ ActiveRecord::Schema.define(version: 20161211143945) do
     t.date     "delivery_date"
     t.text     "observations"
     t.string   "location"
+    t.jsonb    "checked_in",    default: []
     t.integer  "user_id"
     t.integer  "receiver_id"
     t.integer  "container_id",  default: 0
+    t.integer  "course_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.index ["container_id"], name: "index_packages_on_container_id", using: :btree
+    t.index ["course_id"], name: "index_packages_on_course_id", using: :btree
     t.index ["receiver_id"], name: "index_packages_on_receiver_id", using: :btree
     t.index ["user_id"], name: "index_packages_on_user_id", using: :btree
   end
