@@ -22,7 +22,7 @@ class ApiController < ApplicationController
   #
   def offices
     offices = Office.select("id, lat, lon, description").all
-    render json: offices, status: :success
+    render json: offices, status: :ok
   end
 
   def calculate_minor_distance
