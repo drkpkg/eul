@@ -1,4 +1,6 @@
-<%= form_for(course) do |f| %>
+<div id="map-container"></div>
+
+<%= form_for(course, html:{class:'ui form'}) do |f| %>
   <% if course.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
@@ -12,11 +14,17 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :route %>
-    <%= f.text_field :route %>
+    <%= f.label :title, 'Descripción' %>
+    <%= f.text_field :title, placeholder: 'Descripción' %>
+  </div>
+  <div class="field">
+    <%= f.label :route, 'Ruta asignada' %>
+    <%= f.select :route, Office.all.collect {|office| [office.description, office.id]},{prompt: "Seleccione orden de rutas"},{multiple: true, class:'ui fluid dropdown'} %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="ui buttons">
+
+    <%= f.submit 'Guardar', class: 'ui green button' %>
+    <%= link_to 'Back', courses_path, class: 'ui red button' %>
   </div>
 <% end %>

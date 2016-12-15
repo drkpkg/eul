@@ -13,14 +13,14 @@ gem 'dotenv-rails'
 gem 'semantic-ui-sass'
 gem 'hashids'
 gem 'leaflet-rails'
-gem 'httparty'
+gem 'geokit'
 
 group :development, :test do
   gem 'byebug', platform: :mri
 end
 
 group :development do
-  gem 'better_errors'
+  # gem 'better_errors'
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
   gem 'spring'

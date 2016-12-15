@@ -24,7 +24,7 @@ function initOffices(){
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
     $('#map-container').empty().html('<div id="map-office" class="map-office"></div>');
-    map = L.map('map-office').setView([lat, lon], 3);
+    map = L.map('map-office').setView([lat, lon], 4);
     layer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
     layer.addTo(map);
     $.get('/admin/offices.json', function(data){
@@ -44,7 +44,7 @@ function initMap(){
     var lon = position.coords.longitude;
     $('#map-container').empty().html('<div id="map-office" class="map-office"></div>');
     changeLocation(lat, lon);
-    map = L.map('map-office').setView([lat, lon], 18);
+    map = L.map('map-office').setView([lat, lon], 12);
     layer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
     marker = L.marker([lat, lon],{draggable: true});
     layer.addTo(map)

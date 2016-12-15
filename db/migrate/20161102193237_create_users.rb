@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :email
       t.string :password_digest
       t.integer :user_type
+      t.references :office, on_delete: :cascade
       t.timestamps
     end
   end

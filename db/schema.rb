@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20161211143945) do
   end
 
   create_table "courses", force: :cascade do |t|
+    t.string   "title"
     t.jsonb    "route"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20161211143945) do
     t.date     "shipping_date"
     t.date     "delivery_date"
     t.text     "observations"
+    t.string   "location"
     t.integer  "user_id"
     t.integer  "receiver_id"
     t.integer  "container_id",  default: 0
@@ -76,8 +78,10 @@ ActiveRecord::Schema.define(version: 20161211143945) do
     t.string   "email"
     t.string   "password_digest"
     t.integer  "user_type"
+    t.integer  "office_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["office_id"], name: "index_users_on_office_id", using: :btree
   end
 
 end

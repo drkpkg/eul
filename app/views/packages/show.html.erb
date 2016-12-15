@@ -1,71 +1,90 @@
-<h1>Información de paquete</h1>
-
+<h1>
+  Información de paquete
+  <% if @package.fragility %>
+    <label class="ui teal label">Frágil</label>
+  <% else %>
+    <label class="ui orange label">General</label>
+  <% end %>
+</h1>
+<% state = ['No enviado', 'Enviado', 'Parado', 'Entregado'] %>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Code:</strong>
-  <%= @package.code %>
-</p>
+<div class="ui segment">
+  <p>
+    <strong>Código:</strong>
+    <%= @package.code %>
+  </p>
 
-<p>
-  <strong>State:</strong>
-  <%= @package.state %>
-</p>
+  <p>
+    <strong>Estado:</strong>
+    <%= state[@package.state] %>
+  </p>
 
-<p>
-  <strong>Fragility:</strong>
-  <%= @package.fragility %>
-</p>
+  <p>
+    <strong>Tamaño:</strong>
+    <%= @package.size %>
+  </p>
 
-<p>
-  <strong>Size:</strong>
-  <%= @package.size %>
-</p>
+  <p>
+    <strong>Peso:</strong>
+    <%= @package.weight %>
+  </p>
 
-<p>
-  <strong>Weight:</strong>
-  <%= @package.weight %>
-</p>
+  <p>
+    <strong>Valor:</strong>
+    <%= @package.value %>
+  </p>
 
-<p>
-  <strong>Value:</strong>
-  <%= @package.value %>
-</p>
+  <p>
+    <strong>Conveyance:</strong>
+    <%= @package.conveyance %>
+  </p>
 
-<p>
-  <strong>Conveyance:</strong>
-  <%= @package.conveyance %>
-</p>
+  <p>
+    <strong>Fecha de registro:</strong>
+    <%= @package.shipping_date %>
+  </p>
 
-<p>
-  <strong>Shipping date:</strong>
-  <%= @package.shipping_date %>
-</p>
+  <p>
+    <strong>Fecha estimada de entrega:</strong>
+    <%= @package.delivery_date %>
+  </p>
 
-<p>
-  <strong>Delivery date:</strong>
-  <%= @package.delivery_date %>
-</p>
+  <p>
+    <strong>Observaciones:</strong>
+    <%= @package.observations %>
+  </p>
 
-<p>
-  <strong>Observations:</strong>
-  <%= @package.observations %>
-</p>
+  <p>
+    <strong>Cliente:</strong>
+    <%= @package.user.name %> <%= @package.user.lastname %>
+  </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @package.user %>
-</p>
+  <p>
+    <strong>Remitente:</strong>
+    <%= @package.receiver.name %>
+  </p>
+</div>
 
-<p>
-  <strong>Receiver:</strong>
-  <%= @package.receiver %>
-</p>
+<div class="ui segment">
+  <div class="ui steps">
+    <div class="step">
+      <div class="content">
+        1
+      </div>
+    </div>
+    <div class="step">
+      <div class="content">
+        2
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Container:</strong>
-  <%= @package.container %>
-</p>
-
-<%= link_to 'Edit', edit_package_path(@package) %> |
-<%= link_to 'Back', packages_path %>
+<div class="ui buttons">
+  <!-- <%= link_to 'Checking', edit_package_path(@package), class: "ui teal button" %> -->
+  <%= link_to 'Volver', packages_path, class: "ui blue button" %>
+  <% if @package.state == 0 %>
+    <%= link_to 'Cancelar Envío', @package, method: :delete, data: { confirm: '¿Seguro de cancelar el envío?' }, class:'ui red button' %>
+  <% end %>
+</div>

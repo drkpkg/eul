@@ -1,10 +1,10 @@
-<h1>Actualizar Información de paquete</h1>
+<h1>Checking</h1>
 
 <%= form_for(@package, html:{class: "ui form"}) do |f| %>
   <% if @package.errors.any? %>
     <%= render 'general/error', model_object: @package %>
   <% end %>
-  <div class="four fields">
+  <!-- <div class="four fields">
     <div class="field">
       <%= f.label :size, 'Tamaño' %>
       <%= f.text_field :size, placeholder:'{largo}x{ancho}x{alto}' %>
@@ -28,33 +28,6 @@
       <%= f.text_field :value, disabled: true %>
     </div>
   </div>
-
-  <div class="three fields">
-    <div class="field">
-      <%= f.label :user_id, 'Cliente' %>
-      <div class="ui action">
-        <%= f.select :user_id, @users.collect { |t| [t.name, t.id] },{},{include_blank: true, class: 'ui fluid search selection dropdown'}%>
-      </div>
-    </div>
-    <div class="field">
-      <%= f.label :receiver_id, 'Remitente' %>
-      <div class="ui action input">
-        <%= f.select :receiver_id, Receiver.all.collect { |t| [t.name, t.id] },{},{include_blank: true, class: 'ui fluid search selection dropdown'}%>
-        <%= link_to receivers_new_remote_url, remote: true, class: 'ui icon button pop', data:{content: 'Nuevo remitente'} do %>
-          <i class="ui green add circle icon"></i>
-        <% end %>
-      </div>
-    </div>
-    <div class="field">
-      <%= f.label :conveyance, 'Tipo de envío' %>
-      <%= f.select :conveyance, {},{},{include_blank: true, class: 'ui fluid search selection dropdown'} do %>
-        <option value="1">Terrestre</option>
-        <option value="2">Aéreo</option>
-        <option value="3">Marino</option>
-      <% end %>
-    </div>
-  </div>
-
   <div class="two fields">
     <div id="shipping_date" class="field ui calendar">
       <%= f.label :shipping_date, 'Fecha de envío' %>
@@ -64,12 +37,12 @@
       <%= f.label :delivery_date, 'Fecha límite de entrega' %>
       <%= f.text_field :delivery_date %>
     </div>
-  </div>
+  </div> -->
 
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :observations, 'Observaciones' %>
     <%= f.text_area :observations %>
-  </div>
+  </div> -->
 
   <div class="ui buttons">
     <%= f.submit 'Guardar', class: "ui green button" %>

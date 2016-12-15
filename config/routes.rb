@@ -28,6 +28,10 @@ Rails.application.routes.draw do
       post 'calculate' => 'packages#calculate'
     end
 
+    scope :geo do
+      get 'calculate' => 'api#calculate_minor_distance'
+    end
+
     scope :offices do
       get '/' => 'api#offices'
     end

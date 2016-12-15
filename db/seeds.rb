@@ -8,35 +8,42 @@ adm = User.new(name: 'Admin',
             phone: '12340987',
             email: 'admin@fulanito.com',
             password: '123456',
-            user_type: 0)
+            user_type: 0,
+            office_id: 1)
 adm.save
 
-user = User.new(name: 'Cosme',
+employee = User.new(name: 'Javier',
+            lastname: 'Fulanito',
+            document: '1232322',
+            phone: '12345648',
+            email: 'javier@fulanito.com',
+            password: '123456',
+            user_type: 1,
+            office_id: 1)
+employee.save
+
+client = User.new(name: 'Cosme',
             lastname: 'Fulanito',
             document: '1232323',
             phone: '12345678',
             email: 'cosme@fulanito.com',
             password: '123456',
-            user_type: 2)
-user.save
+            user_type: 2,
+            office_id: 1)
+client.save
 
-receiver = Receiver.new(name: 'Warrio colitas',
-                        phone: '12345678',
-                        address: 'Reino muy muy lejano')
-receiver.save
-
-packages = [
-            {code: 'HmrNHzNdMl',
-            fragility: true,
-            size: '10x30x12',
-            weight: 3.5,
-            value: 15.59,
-            conveyance: 1,
-            shipping_date: '06/11/2016',
-            delivery_date: '07/11/2016',
-            user_id: user.id,
-            receiver_id: receiver.id}
-           ]
+# packages = [
+#             {code: 'HmrNHzNdMl',
+#             fragility: true,
+#             size: '10x30x12',
+#             weight: 3.5,
+#             value: 15.59,
+#             conveyance: 1,
+#             shipping_date: '06/11/2016',
+#             delivery_date: '07/11/2016',
+#             user_id: client.id,
+#             receiver_id: .id}
+#            ]
 
 packages.each do |package|
   pkg = Package.new(package)
@@ -45,7 +52,7 @@ packages.each do |package|
 end
 
 courses = [
-  {lat: -17.786566518254055, lon: -63.18745851516724, description: "Por aqui"},
+  {lat: -17.786566518254055, lon: -63.18745851516724, description: "Oficina principal"},
   {lat: -17.371610024104744, lon: -63.28674316406249, description: "Oficina Montero"},
   {lat: 60.93991814536288, lon: 76.55695080757141,	description: "Oficina Tomsk"},
   {lat: -18.145851771694467, lon: -65.9619140625,	description: "Oficina Santa Cruz de la sierra"},

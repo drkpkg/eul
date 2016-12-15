@@ -80,12 +80,22 @@ function initPackage(){
   });
 
   $('#package_receiver_id').change(function(){
-    $('#dimmer-loader').addClass('active')
-    // $.ajax({
-    //   url: '/api/courses/calculate_route'
-    // });
-
-    $('#dimmer-loader').removeClass('active')
+    $.get('/admin/receivers/'+ $(this).val() + '.json', function(data){
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var lat = position.coords.latitude;
+        var lon = position.coords.longitude;
+        $.ajax({
+          url: '/api/geo/calculate',
+          type: 'GET',
+          data: {location:{lat: lat,lon: lon}, destiny:{lat: data.lat, lon: data.lon}},
+          success: function(data){
+            call_calculator();
+            t = parseFloat($('#package_value').val()) + parseFloat(data.total);
+            $('#package_value').val(t);
+          }
+        });
+      });
+    });
   });
 }
 

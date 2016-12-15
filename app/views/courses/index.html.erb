@@ -1,27 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Courses</h1>
+<h1>Rutas</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Route</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.route %></td>
-        <td><%= link_to 'Show', course %></td>
-        <td><%= link_to 'Edit', edit_course_path(course) %></td>
-        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Course', new_course_path %>
+<% @courses.each do |course| %>
+  <div class="column route">
+    <label class="ui teal label attach">Ruta: <%= course.title %></label>
+    <div class="ui tiny steps">
+      <% r = course.route['r'].reject { |c| c.empty? } %>
+      <% r.each do |route| %>
+        <% office = Office.find_by(id: route) %>
+        <div class="step">
+          <i class="map pin icon"></i>
+          <div class="content">
+            <div class="title"><%= office.description %></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

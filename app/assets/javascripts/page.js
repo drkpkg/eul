@@ -3,3 +3,7 @@
 $(document).ready(function() {
   console.log('Fuera de aquí :v');
 });
+
+$(document).on('turbolinks:load',function() {
+  console.log('Fuera de aquí :v');
+});

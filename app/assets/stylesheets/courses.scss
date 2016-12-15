@@ -1,3 +1,18 @@
 // Place all the styles related to the Courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#map-standar {
+  width: auto;
+  height: 400px !important;
+}
+
+.attach{
+  left: 10px !important;
+  position: absolute !important;
+  z-index: 1;
+}
+
+.route{
+  margin-top: 10px !important;
+}

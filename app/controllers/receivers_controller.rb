@@ -73,11 +73,6 @@ class ReceiversController < ApplicationController
     @receiver = Receiver.new(receiver_params)
   end
 
-  # def render_map
-  #   map_r = 'map(:center => {:latlng => [#{params[:lat]},#{params[:lon]}],:zoom => 18}, :markers => [{:latlng => [51.52238797921441, -0.08366235665359283],:popup => "Hello!"}])'
-  #   render text: map_r
-  # end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.

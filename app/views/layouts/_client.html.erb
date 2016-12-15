@@ -1,0 +1,47 @@
+<div class="ui container">
+  <div class="ui secondary menu">
+    <div class="header item">EUL</div>
+
+    <div class="right menu">
+      <%= button_to delete_url, method: :post, class: "ui item icon button pop", data:{content:"Cerrar sesión"} do %>
+        <i class="ui remove icon"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="ui divider"></div>
+  <div class="ui grid">
+    <div class="four wide column">
+      <div class="ui compact secondary vertical pointing fluid menu">
+        <%= link_to dashboard_url, class: "item" do %>
+          <i class="dashboard icon"></i>
+          Dashboard
+        <% end %>
+
+        <div class="ui accordion">
+          <div class="active title">
+            <i class="dropdown icon"></i>
+            Mis envíos
+          </div>
+          <div class="content">
+            <%= link_to packages_url(@current_user), class: 'item' do %>
+              Listado
+              <i class="cubes icon"></i>
+            <% end %>
+            <%= link_to new_package_url, class: 'item' do %>
+              Nuevo paquete
+              <i class="ui icon">
+                <i class="ui icons">
+                  <i class="cubes icon"></i>
+                  <i class="plus corner icon"></i>
+                </i>
+              </i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="twelve wide column">
+      <%= yield %>
+    </div>
+  </div>
+</div>

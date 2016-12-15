@@ -33,14 +33,23 @@
       <%= f.text_field :document %>
     </div>
 
-    <div class="field">
-      <%= f.label :user_type_id, 'Tipo de usuario' %>
-      <%= f.select :user_type, {},{prompt: 'Tipo de usuario'},{include_blank: true, class: 'ui fluid search selection dropdown'} do %>
-        <option value="0">Administrador</option>
-        <option value="1">Empleado</option>
-        <option value="2">Cliente</option>
-      <% end %>
+    <div class="two fields">
+      <div class="field">
+        <%= f.label :user_type_id, 'Tipo de usuario' %>
+        <%= f.select :user_type, {},{prompt: 'Rol'},{include_blank: true, class: 'ui fluid search selection dropdown'} do %>
+          <option value="0">Administrador</option>
+          <option value="1">Empleado</option>
+          <option value="2">Cliente</option>
+        <% end %>
+      </div>
+      <div id="employee_" class="field">
+        <div class="field">
+          <%= f.label :office_id, 'Tipo de usuario' %>
+          <%= f.select :office_id, Office.all.collect { |t| [t.description, t.id] },{prompt: 'Sucursal'},{include_blank: true, class: 'ui fluid search selection dropdown'} %>
+        </div>
+      </div>
     </div>
+
   </div>
 
   <div class="three fields">
