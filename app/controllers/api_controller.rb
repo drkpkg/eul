@@ -31,9 +31,9 @@ class ApiController < ApplicationController
       destination = "#{params[:destiny][:lat]}, #{params[:destiny][:lon]}"
       # d = distance current_location, destination
       total = (current_location.distance_to(destination).to_f/1.60934)
-      render json: {total: (total*0.01).round(3)}
+      render json: {total: (total*0.01).round(3)}, status: :ok
     rescue
-      render json: {total: 0}
+      render json: {total: 0}, status: :ok
     end
   end
 
