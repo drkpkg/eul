@@ -6,12 +6,11 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    begin
+    if params[:e]
       @courses = Course.where(express: params[:e])
-    rescue
+    else
       @courses = Course.all
     end
-
   end
 
   # GET /courses/1

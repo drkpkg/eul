@@ -32,33 +32,38 @@ client = User.new(name: 'Cosme',
             office_id: 1)
 client.save
 
-# packages = [
-#             {code: 'HmrNHzNdMl',
-#             fragility: true,
-#             size: '10x30x12',
-#             weight: 3.5,
-#             value: 15.59,
-#             conveyance: 1,
-#             shipping_date: '06/11/2016',
-#             delivery_date: '07/11/2016',
-#             user_id: client.id,
-#             receiver_id: .id}
-#            ]
+receivers = [{"name":"Felix Daniel Coca","phone":"03999392","address":"Clayton","lat":"37.940419626371835","lon":"-121.93587183952332"},
+            {"name":"Hello Inc.","phone":"8291289","address":"Tomsk","lat":"56.48923778180732","lon":"84.95302677154541"}]
 
-# packages.each do |package|
-#   pkg = Package.new(package)
-#   pkg.save
-#   puts pkg.errors.full_messages
-# end
+receivers.each do |r|
+  Receiver.create(r)
+end
 
-courses = [
-  {lat: -17.786566518254055, lon: -63.18745851516724, description: "Oficina principal"},
-  {lat: -17.371610024104744, lon: -63.28674316406249, description: "Oficina Montero"},
-  {lat: 60.93991814536288, lon: 76.55695080757141,	description: "Oficina Tomsk"},
-  {lat: -18.145851771694467, lon: -65.9619140625,	description: "Oficina Santa Cruz de la sierra"},
-  {lat: 38.634639869944, lon: -90.31676888465881,	description: "Oficina Clayton"}
+offices = [
+  [lat: -17.786566518254055, lon: -63.18745851516724, description: "Oficina principal"],
+  [lat: -17.371610024104744, lon: -63.28674316406249, description: "Oficina Montero"],
+  [lat: 60.93991814536288, lon: 76.55695080757141,	description: "Oficina Tomsk"],
+  [lat: -18.145851771694467, lon: -65.9619140625,	description: "Oficina Santa Cruz de la sierra"],
+  [lat: 38.634639869944, lon: -90.31676888465881,	description: "Oficina Clayton"]
 ]
 
-courses.each do |course|
+offices.each do |course|
   Office.create(course)
 end
+
+# courses = [[route:{'r' => ["","3","5"]},express:false,title:"Estados unidos - Rusia"],
+#           [route: {'r' => ["","1","4"]},express:false,title:"Santa Cruz - Oruro"],
+#           [route: {'r' => ["","1","5"]},express:true,title:"Santa cruz"]]
+#
+# courses.each do |course|
+#   c = Course.new(course)
+#   c.save
+#   puts c.errors.full_messages
+# end
+
+# packages = [{"code":"EwTEuBtdNUriAuEtYk","state":1,"fragility":true,"size":"11x4x14","weight":1200.0,"value":67.79,"conveyance":2,"shipping_date":"2016-12-16","delivery_date":"2016-12-17","observations":"","user_id":3,"receiver_id":1,"checked_in":[], course_id: 1},
+# {"code":"RBT4iNtBATgiatXtk","state":3,"fragility":false,"size":"10x10x14","weight":500.0,"value":12.43,"conveyance":2,"shipping_date":"2016-12-15","delivery_date":"2016-12-19","observations":"","user_id":3,"receiver_id":2,"checked_in":["3","5"]}, course_id: 2]
+#
+# packages.each do |pkg|
+#   Package.create(pkg)
+# end

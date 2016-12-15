@@ -72,14 +72,14 @@
     <% course.route['r'].each do |index| %>
       <% if index != '' %>
         <% if @package.checked_in.include?(index) %>
-          <%= link_to checking_package_url(pid: @package.id, cid: index), method: :post, remote: true, class:"completed step" do %>
+          <div class="completed step">
             <i class="pin map icon"></i>
             <div class="content">
               <%= Office.find_by(id: index).description %>
             </div>
-          <% end %>
+          </div>
         <% else %>
-          <%= link_to checking_package_url(pid: @package.id, cid: index), method: :post, remote: true, class:"step" do %>
+          <%= link_to checking_package_url(pid: @package.id, cid: index), method: :post, class:"step" do %>
             <div class="content">
               <%= Office.find_by(id: index).description %>
             </div>
@@ -89,9 +89,8 @@
     <% end %>
   </div>
 <!-- </div> -->
-
+<br>
 <div class="ui buttons">
-  <!-- <%= link_to 'Checking', edit_package_path(@package), class: "ui teal button" %> -->
   <%= link_to 'Volver', packages_path, class: "ui blue button" %>
   <% if @package.state == 0 %>
     <%= link_to 'Cancelar Envío', @package, method: :delete, data: { confirm: '¿Seguro de cancelar el envío?' }, class:'ui red button' %>

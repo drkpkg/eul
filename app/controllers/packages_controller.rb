@@ -73,11 +73,19 @@ class PackagesController < ApplicationController
     if @package.state == 0
       @package.state = 1 #enviado
     end
-    @package.checked_in.push(params[:cid])
-    if @package.save
-      render json: {status: :ok}
-    else
-      render json: {status: :bad_request}
+    @package.checked_in.push(params[:cid]) if !@package.checked_in.include?(params[:cid])
+    course = Course.find_by(id: @package.course_id)
+    if course.route['r'].length == @package.checked_in.length+1
+      @package.state = 3
+    end
+
+    respond_to do |format|
+      if @package.save
+          format.html { redirect_to @package, notice: 'Package was successfully updated.' }
+      else
+        format.html { render @package, notice: 'No se puede guardar' }
+        format.json { render json: @package.errors, status: :unprocessable_entity }
+      end
     end
   end
 
