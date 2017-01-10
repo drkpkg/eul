@@ -16,6 +16,10 @@
   </p>
 
   <p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<%= @package.code %>" alt="" />
+  </p>
+
+  <p>
     <strong>Estado:</strong>
     <%= state[@package.state] %>
   </p>
