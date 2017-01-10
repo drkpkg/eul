@@ -9,7 +9,14 @@ class ApiController < ApplicationController
   def package_info
     begin
       @package = Package.find_by(code: params[:code])
-      render json: {code: @package.code, state: @package.state_human, shipping_date: @package.shipping_date, delivery_date: @package.delivery_date, observations: @package.observations, checked_in: @package.checked_in}, status: :ok
+      render json: {code: @package.code,
+        state: @package.state_human,
+        type: @package.fragility_human,
+        shipping_date: @package.shipping_date,
+        delivery_date: @package.delivery_date,
+        observations: @package.observations,
+        places: @package.places_human},
+        status: :ok
     rescue
       render json: {status: :bad_request}, status: :bad_request
     end

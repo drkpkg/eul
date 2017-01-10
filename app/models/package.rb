@@ -9,4 +9,19 @@ class Package < ApplicationRecord
     state = ['No enviado', 'Enviado', 'Parado', 'Entregado']
     state[self.state]
   end
+
+  def places_human
+    places = []
+    course = Course.find_by(id: self.course_id)
+    course = course.route['r']-[""]
+    course.each do |place|
+      places << Office.find_by(id: place).description
+    end
+    return places
+  end
+
+  def fragility_human
+    return 'Frágil' if self.fragility == true
+    return 'Estándar' if self.fragility == false
+  end
 end
